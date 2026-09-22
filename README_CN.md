@@ -2,35 +2,35 @@
 
 **面向金融、会计、经济、保险与实证商科研究。**
 
-[English](README.md) · **v1.0.0** · **Codex verified** · **Apache-2.0**
+[英文](README.md) · **v1.0.0** · **已通过 Codex 验证** · **Apache-2.0**
 
 **还在因为找不到合作者而焦虑？还在等一条迟迟不来的回复？还希望有人愿意陪你把每一条引用、每一个数据处理、每一个实证细节重新过一遍？**
 
-ScholarOps 把 AI 变成一个可以一直陪你盯细节的研究合作者。它可以和你一起逐字读论文、逐条追引用、重新走数据流程、反复琢磨研究设计，并检查最终的 claim 是否真的和证据对得上。它更像多了一位始终盯着细节的合作者，从 **来源 → 数据 → 设计 → 结果 → 结论** 一直陪到文章成形。
+ScholarOps 把 AI 变成一个可以一直陪你盯细节的研究合作者。它可以和你一起逐字读论文、逐条追溯引用、重新走一遍数据流程、反复琢磨研究设计，并检查最终结论是否真的与证据一致。它更像多了一位始终盯着细节的合作者，从 **来源 → 数据 → 设计 → 结果 → 结论** 一直陪到文章成形。
 
-ScholarOps 来自对真实金融实证研究流程的反复使用，并在首个公开版本发布前，用合成研究案例完成了 Codex 端到端行为验证。
+ScholarOps 来自对真实金融实证研究流程的反复使用，并在首个公开版本发布前，使用合成研究案例完成了 Codex 端到端行为验证。
 
 ## 它能和你一起做什么
 
-- **文献与引用** — 找最近的前序研究和危险邻居，确认文献身份与定位，并逐条检查引用是否真的支持对应句子。
-- **数据与测量** — 检查数据权限、原始数据 QA、标识符、匹配、缺失、尾部、变量构造、aggregation，以及数据是否仍然测量原本的 construct。
-- **研究设计** — 核查 unit、estimand、treatment、timing、identification、inference、sample support、方法 precedent 与项目特定假设。
-- **结果前纪律** — 管理 freeze、blindness、Seen Data、pilot/screen 边界，以及哪些研究决定在结果被打开后已经不可逆。
-- **结果与结论** — 检查 implementation QA、表图与执行结果一致性、multiplicity、specification search、economic threshold，以及证据最高能支持到什么 claim。
-- **长期项目** — 管理 artifact identity、reproducibility、structured state，用 `RE` 恢复项目，用 `AU` 向前追溯工作流缺口。
+- **文献与引用** — 找到最近的前序研究和最可能撞题的文献，确认文献身份与具体位置，并逐条检查引用是否真的支持对应句子。
+- **数据与测量** — 检查数据权限、原始数据质量、标识符、匹配、缺失值、极端值、变量构造、聚合方式，以及数据是否仍然测量原本的构念。
+- **研究设计** — 核查分析单位、目标估计量、处理与对照、时间设定、识别策略、统计推断、样本支持、方法先例与项目特定假设。
+- **结果前纪律** — 管理结果前冻结、盲态、已见数据、初步试验与筛选边界，以及哪些研究决定在结果被打开后已经不可逆。
+- **结果与结论** — 检查程序实现、表图与实际执行结果是否一致、多重检验、模型设定搜索、经济意义门槛，以及证据最高能支持到什么结论。
+- **长期项目** — 管理研究产物身份、可复现性与结构化项目状态；用 `RE` 恢复项目，用 `AU` 向前追溯工作流中的实质缺口。
 
-Full Skill 还包含一个可选的 **AI × Finance** profile，用于 AI capability、adoption、decision、holdings/trades 与 market outcome 等研究问题。
+完整版还包含一个可选的 **AI × 金融** 专用模块，用于研究 AI 能力、采用、决策、持仓或交易以及市场结果之间的关系。
 
 ## 快速开始
 
-### 方式 1 — 不安装 Skill
+### 方式 1 — 不安装
 
 直接使用可复制提示词：
 
 - [快速开始 — 简体中文](quickstart/QUICK_START_CN.md)
-- [Quick Start — English](quickstart/QUICK_START.md)
+- [英文快速开始](quickstart/QUICK_START.md)
 
-### 方式 2 — 在 Codex 中安装 Full Skill
+### 方式 2 — 在 Codex 中安装完整 ScholarOps
 
 ```bash
 git clone https://github.com/white-ink-cell/scholarops-research.git
@@ -38,7 +38,7 @@ mkdir -p ~/.agents/skills
 cp -R scholarops-research/skills/scholarops ~/.agents/skills/
 ```
 
-Codex 会从 `$HOME/.agents/skills` 发现用户级 Skill。可安装目录是：
+Codex 会从 `$HOME/.agents/skills` 读取用户级技能。可安装目录是：
 
 ```text
 skills/scholarops/
@@ -47,65 +47,65 @@ skills/scholarops/
 安装后直接用自然语言工作。例如：
 
 ```text
-仔细读这段文献综述。找最近的前序研究，并逐条核查引用是否真的支持对应的 claim。
+仔细读这段文献综述。找出最接近的前序研究，并逐条核查每一处引用是否真的支持对应结论。
 ```
 
 ```text
-从这张回归表向前追溯数据构造，告诉我整个实证流程里哪些地方可能出错。
+从这张回归表向前追溯数据构造，告诉我整个实证流程中哪些地方可能出错。
 ```
 
 ```text
-在打开主结果前，冻结 hypothesis、sample、variables、thresholds 和 main specification。
+在打开主结果前，冻结核心假设、样本规则、变量定义、关键阈值和主模型设定。
 ```
 
 ```text
 AU
 ```
 
-`AU` 会向前追溯整个工作流，找到最早的实质缺口；`RE` 会从 structured state 与已登记 artifacts 中恢复当前最可信的项目状态。
+`AU` 会沿着工作流向前追溯，找到最早出现的实质缺口；`RE` 会根据结构化项目状态和已登记的研究产物，恢复当前最可信的项目状态。
 
 ## 研究流程
 
 ```text
 研究问题
-→ 文献 landscape / focused census
-→ 撞题与 contribution check
-→ construct / measurement / identification
-→ 数据获取与 QA
-→ 结果前 freeze
-→ 可选 outcome screen
-→ formal empirical study
-→ robustness / specification governance
-→ evidence-to-claim review
-→ reproducibility 与 project state
+→ 宽范围文献扫描 / 聚焦式文献检索
+→ 撞题与贡献核查
+→ 构念 / 测量 / 识别
+→ 数据获取与质量检查
+→ 结果前冻结
+→ 可选的初步结果筛选
+→ 正式实证研究
+→ 稳健性与模型设定治理
+→ 证据与结论核对
+→ 可复现性与项目状态
 ```
 
-ScholarOps 会按当前项目真正存在的风险激活检查，让工作流与研究问题本身保持匹配。
+ScholarOps 会根据当前项目真正存在的风险激活检查，让工作流与研究问题本身保持匹配。
 
 ## 为什么它更像一个研究合作者
 
 ### 在真实论文流程里反复打磨
 
-ScholarOps 在真实金融实证研究项目中反复使用和修改，覆盖从文献与数据处理到正式结果与 claim 的完整流程。v1.0.0 随后完成了 10 个原生 Codex 行为案例验证，覆盖 routing、`RE`、`AU`、blindness-safe recovery、文献 collision、screen/formal-study 分离、data fallback、profile isolation 与 persistence boundary。
+ScholarOps 在真实金融实证研究项目中反复使用和修改，覆盖从文献与数据处理到正式结果与研究结论的完整流程。v1.0.0 随后完成了 10 个原生 Codex 行为案例验证，覆盖任务路由、`RE`、`AU`、保持盲态的项目恢复、文献撞题、初步筛选与正式研究的分离、数据替代边界、专用模块隔离和持久化权限边界。
 
 ### 它会一直盯住细节
 
-一篇论文可能因为一个很小的错出问题：引用了错误版本、文献只支持半句话、identifier merge 改变了样本、proxy 偏离 construct、看过结果后又改 specification，或者表格已经和实际执行输出不一致。ScholarOps 会把这些细节重新拉回研究判断本身。
+一篇论文可能因为一个很小的错出问题：引用了错误版本、文献只支持半句话、标识符合并改变了样本、替代变量偏离原本构念、看过结果后又修改模型设定，或者表格已经和实际执行结果不一致。ScholarOps 会把这些细节重新拉回研究判断本身。
 
 ### 它会把文字背后的证据重新翻出来
 
-Executed code、logs、frozen artifacts、source records 与 verified outputs 会被放在比方便的 summary 或过期 notes 更高的位置。这样更容易发现隐藏错误、重新核查假设，并让长期研究流程始终和实际做过的事情对得上。
+实际执行的代码、日志、冻结的研究产物、来源记录与已核验输出，会被放在比方便的总结或过期笔记更高的位置。这样更容易发现隐藏错误、重新核查假设，并让长期研究流程始终和真正做过的事情对得上。
 
 ## 适合的场景
 
-- MSc dissertation 与实证硕士论文
-- RA / predoc 研究
-- PhD paper 与 working paper
-- 文献与 citation checking
-- data pipeline 与 measurement checking
-- empirical design / identification review
-- result-to-claim 一致性核查
-- 长周期研究项目的 reproducibility 与 handoff
+- 硕士论文与实证型毕业论文
+- 研究助理与博士预备研究
+- 博士论文、论文项目与工作论文
+- 文献检索与引用核查
+- 数据流程与测量核查
+- 实证设计与识别策略审查
+- 结果与结论的一致性核查
+- 长周期研究项目的可复现性与交接
 
 ## 方法来源
 
@@ -115,48 +115,28 @@ Executed code、logs、frozen artifacts、source records 与 verified outputs �
 skills/scholarops/references/METHOD_SOURCE_REGISTRY.csv
 ```
 
-Registry 记录 source、locator、verification status，以及该来源实际支持到哪里。ScholarOps 自己的 workflow rule 与外部方法依据保持区分。
-
-## 仓库结构
-
-```text
-scholarops-research/
-├── README.md
-├── README_CN.md
-├── quickstart/                 # 可复制提示词
-├── examples/                   # 合成研究案例
-├── skills/scholarops/          # Full Skill
-│   ├── SKILL.md
-│   ├── modules/
-│   ├── governance/
-│   ├── profiles/
-│   ├── references/
-│   └── runtime/
-├── spec/                       # maintenance source spec
-├── tooling/                    # runtime builder / validator
-└── tests/                      # release checks
-```
+该登记表记录来源、具体位置、核验状态，以及每个来源实际能够支持到哪里。ScholarOps 自己的工作流规则与外部方法依据保持区分。
 
 ## 验证
 
 **v1.0.0** 已完成：
 
-- 原生 Codex 端到端行为验证；
-- source/runtime consistency checks；
-- generated-runtime drift checks；
-- bilingual human-facing checks；
-- public privacy 与 source-body scans。
+- Codex 原生端到端行为验证；
+- 来源与运行文件一致性检查；
+- 自动生成运行文件的偏移检查；
+- 中英文公开内容检查；
+- 公开隐私与来源正文扫描。
 
-原生验证使用 **Codex CLI 0.155.1** 与合成研究 fixtures 完成。
+原生验证使用 **Codex CLI 0.155.1** 与合成研究案例完成。
 
-## Issues
+## 问题与建议
 
-Bug、文档问题和 feature request 请使用 [GitHub Issues](https://github.com/white-ink-cell/scholarops-research/issues)。
+程序错误、文档问题和功能建议请使用 [GitHub Issues](https://github.com/white-ink-cell/scholarops-research/issues)。
 
-## 引用
+## 如何引用 ScholarOps
 
-见 [`CITATION.cff`](CITATION.cff)。
+GitHub 会根据 [`CITATION.cff`](CITATION.cff) 生成 ScholarOps 的标准引用信息。若你在研究项目中正式引用这个工具，可使用 GitHub 提供的引用格式。
 
-## License
+## 许可证
 
 [Apache License 2.0](LICENSE)
