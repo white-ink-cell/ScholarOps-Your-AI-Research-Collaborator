@@ -117,26 +117,6 @@ skills/scholarops/references/METHOD_SOURCE_REGISTRY.csv
 
 The registry records the source, locator, verification status, and the boundary of what that source supports. ScholarOps-specific workflow rules remain distinguishable from the external methods they build on.
 
-## Repository map
-
-```text
-scholarops-research/
-├── README.md
-├── README_CN.md
-├── quickstart/                 # copy-paste prompt
-├── examples/                   # synthetic research fixtures
-├── skills/scholarops/          # installable full Skill
-│   ├── SKILL.md
-│   ├── modules/
-│   ├── governance/
-│   ├── profiles/
-│   ├── references/
-│   └── runtime/
-├── spec/                       # maintenance source spec
-├── tooling/                    # runtime builder / validator
-└── tests/                      # release checks
-```
-
 ## Validation
 
 **v1.0.0** passed:
@@ -155,7 +135,7 @@ Use [GitHub Issues](https://github.com/white-ink-cell/scholarops-research/issues
 
 ## Citation
 
-See [`CITATION.cff`](CITATION.cff).
+GitHub uses [`CITATION.cff`](CITATION.cff) to generate standard citation metadata for ScholarOps.
 
 ## License
 
