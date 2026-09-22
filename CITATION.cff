@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use ScholarOps in research, teaching, or a research workflow, please cite the released version you used."
-title: "ScholarOps — Finance, Accounting & Business Research Skills"
+title: "ScholarOps — Your AI Research Collaborator"
 type: software
 authors:
   - name: "white-ink-cell"
@@ -10,8 +10,9 @@ license: "Apache-2.0"
 repository-code: "https://github.com/white-ink-cell/scholarops-research"
 url: "https://github.com/white-ink-cell/scholarops-research"
 abstract: >-
-  An evidence-gated research workflow and research-governance Agent Skill for finance,
-  accounting, economics, insurance, and related business research.
+  An AI research collaborator for finance, accounting, economics, insurance, and
+  empirical business research, designed for detailed source, data, design, result,
+  and claim checking across long-running research workflows.
 keywords:
   - agent-skills
   - finance-research
@@ -19,3 +20,4 @@ keywords:
   - empirical-research
   - reproducibility
   - research-workflow
+
