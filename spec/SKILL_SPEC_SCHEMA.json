@@ -1,0 +1,575 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/scholarops-skill-spec-3.0.0.schema.json",
+  "title": "ScholarOps Skill Spec",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "release",
+    "toolchain",
+    "modules",
+    "commands",
+    "fields",
+    "states",
+    "tasks",
+    "gates",
+    "invariants",
+    "generated_outputs",
+    "fingerprint",
+    "reserved_state_ids",
+    "precedence_chain",
+    "metadata_policy",
+    "method_sources"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "3.0.0"
+    },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lineage_id",
+        "package_id",
+        "version",
+        "status",
+        "supersedes",
+        "architecture",
+        "skill_root"
+      ],
+      "properties": {
+        "lineage_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "package_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "status": {
+          "enum": [
+            "STABLE",
+            "DRAFT",
+            "PRERELEASE",
+            "DEPRECATED"
+          ]
+        },
+        "supersedes": {
+          "type": "string"
+        },
+        "architecture": {
+          "const": "SCHEMA_DRIVEN_GENERATED_RUNTIME"
+        },
+        "skill_root": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "builder_version",
+        "validator_version",
+        "mutation_suite_version"
+      ],
+      "properties": {
+        "builder_version": {
+          "type": "string"
+        },
+        "validator_version": {
+          "type": "string"
+        },
+        "mutation_suite_version": {
+          "type": "string"
+        }
+      }
+    },
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "path",
+          "role",
+          "description",
+          "load_policy"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "load_policy": {
+            "enum": [
+              "LOADER",
+              "TASK_ROUTED",
+              "TRIGGERED_MODULE",
+              "OPTIONAL_PROFILE"
+            ]
+          }
+        }
+      }
+    },
+    "commands": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "token",
+          "case_insensitive",
+          "mode_field",
+          "mode_value",
+          "action",
+          "precedence",
+          "alone_stop",
+          "description"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "minLength": 1
+          },
+          "case_insensitive": {
+            "type": "boolean"
+          },
+          "mode_field": {
+            "type": "string"
+          },
+          "mode_value": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "precedence": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "alone_stop": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "fields": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field",
+          "allowed_values",
+          "type"
+        ],
+        "properties": {
+          "field": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]*$"
+          },
+          "allowed_values": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "enum": [
+              "enum",
+              "singleton"
+            ]
+          }
+        }
+      }
+    },
+    "states": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state_id",
+          "state",
+          "owner",
+          "entry",
+          "required_artifact",
+          "pass_condition",
+          "allowed_next",
+          "return_or_failure",
+          "global_precondition"
+        ],
+        "properties": {
+          "state_id": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "entry": {
+            "type": "string"
+          },
+          "required_artifact": {
+            "type": "string"
+          },
+          "pass_condition": {
+            "type": "string"
+          },
+          "allowed_next": {
+            "type": "string"
+          },
+          "return_or_failure": {
+            "type": "string"
+          },
+          "global_precondition": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "task_class",
+          "trigger_examples",
+          "required_modules",
+          "routing_note"
+        ],
+        "properties": {
+          "task_class": {
+            "type": "string"
+          },
+          "trigger_examples": {
+            "type": "string"
+          },
+          "required_modules": {
+            "type": "string"
+          },
+          "routing_note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "gate_id",
+          "gate",
+          "activation_class",
+          "trigger",
+          "execution"
+        ],
+        "properties": {
+          "gate": {
+            "type": "string"
+          },
+          "activation_class": {
+            "type": "string"
+          },
+          "trigger": {
+            "type": "string"
+          },
+          "execution": {
+            "type": "string"
+          },
+          "gate_id": {
+            "type": "string",
+            "pattern": "^GATE-[A-Z0-9\\-]+$"
+          }
+        }
+      }
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "invariant_id",
+          "invariant",
+          "required_semantics"
+        ],
+        "properties": {
+          "invariant_id": {
+            "type": "string"
+          },
+          "invariant": {
+            "type": "string"
+          },
+          "required_semantics": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "generated_outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "controlled_vocabulary",
+        "state_machine",
+        "task_router",
+        "gate_policy",
+        "module_registry",
+        "commands",
+        "semantic_invariants",
+        "method_source_locator_registry",
+        "rule_locator_index",
+        "runtime_reference"
+      ],
+      "properties": {
+        "controlled_vocabulary": {
+          "type": "string"
+        },
+        "state_machine": {
+          "type": "string"
+        },
+        "task_router": {
+          "type": "string"
+        },
+        "gate_policy": {
+          "type": "string"
+        },
+        "module_registry": {
+          "type": "string"
+        },
+        "commands": {
+          "type": "string"
+        },
+        "semantic_invariants": {
+          "type": "string"
+        },
+        "method_source_locator_registry": {
+          "type": "string"
+        },
+        "rule_locator_index": {
+          "type": "string"
+        },
+        "runtime_reference": {
+          "type": "string"
+        }
+      }
+    },
+    "fingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "newline_normalization",
+        "line_format",
+        "joiner",
+        "scope",
+        "excluded_and_why"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "SHA256_OVER_SORTED_NORMALIZED_PATH_DIGEST_LINES"
+        },
+        "newline_normalization": {
+          "const": "CRLF_AND_CR_TO_LF"
+        },
+        "line_format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "joiner": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "excluded_and_why": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "reserved_state_ids": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state_id",
+          "reason",
+          "retired_in"
+        ],
+        "properties": {
+          "state_id": {
+            "type": "string",
+            "pattern": "^S[0-9]+$"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "retired_in": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "precedence_chain": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "metadata_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity_only",
+        "forbidden_metadata_keys",
+        "rationale"
+      ],
+      "properties": {
+        "identity_only": {
+          "const": true
+        },
+        "forbidden_metadata_keys": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "method_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rule_id",
+          "source",
+          "source_type",
+          "edition_year",
+          "chapter_section",
+          "page_or_article_locator",
+          "doi_or_stable_id",
+          "fulltext_verified",
+          "transfer_scope",
+          "transfer_status",
+          "claim_supported",
+          "claim_not_supported"
+        ],
+        "properties": {
+          "rule_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "edition_year": {
+            "type": "string",
+            "minLength": 1
+          },
+          "chapter_section": {
+            "type": "string",
+            "minLength": 1
+          },
+          "page_or_article_locator": {
+            "type": "string",
+            "minLength": 1
+          },
+          "doi_or_stable_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "fulltext_verified": {
+            "enum": [
+              "YES",
+              "NO",
+              "PARTIAL"
+            ]
+          },
+          "transfer_scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "transfer_status": {
+            "enum": [
+              "TRANSFERABLE_AS_IS",
+              "TRANSFERABLE_WITH_ADAPTATION",
+              "NOT_TRANSFERABLE_AS_IS",
+              "NOT_ASSESSED"
+            ]
+          },
+          "claim_supported": {
+            "type": "string",
+            "minLength": 1
+          },
+          "claim_not_supported": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

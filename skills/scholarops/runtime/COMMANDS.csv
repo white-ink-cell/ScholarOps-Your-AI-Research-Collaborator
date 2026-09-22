@@ -1,0 +1,3 @@
+token,case_insensitive,mode_field,mode_value,action,precedence,alone_stop,description
+RE,True,RECOVERY_MODE,ON,PROJECT_STATE_RECOVERY,10,True,Recover canonical project state from structured state and registered artifacts; consult archived conversation evidence only when needed; do not auto-advance when RE is the only request.
+AU,True,AUDIT_MODE,ON,CURRENT_WORKFLOW_AUDIT,20,True,Audit the current research workflow and identify the earliest material gap or inconsistency; do not auto-advance when AU is the only request.

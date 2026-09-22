@@ -1,0 +1,10 @@
+id,path,role,description,load_policy
+00,00_CANONICAL_INDEX_EN.md,canonical_loader,"product scope, loading, command precedence, host and recovery boundaries",LOADER
+01,modules/01_CORE_RESEARCH_WORKFLOW_EN.md,canonical_core,"research questions, literature, contribution adjudication, claim discipline",TASK_ROUTED
+02,modules/02_EMPIRICAL_DATA_PILOT_METHODS_EN.md,canonical_empirical,"data, measurement, blindness, screens, formal empirical execution",TASK_ROUTED
+03,profiles/ai-finance/PROFILE_EN.md,optional_domain_profile,AI x Finance specialization only,OPTIONAL_PROFILE
+04,modules/04_ACCESS_INTERFACE_EN.md,canonical_access,platform-neutral data/resource access and assistant-first execution,TASK_ROUTED
+05,modules/05_PROJECT_STATE_EN.md,canonical_project_state,"multi-project state, isolation, hold/close/reopen governance",TASK_ROUTED
+06,modules/06_SPECIALIZED_DESIGN_EVALUATION_GATES_EN.md,canonical_specialized,specialized experiment/evaluation/human-subject/cost-quality gates,TRIGGERED_MODULE
+07,modules/07_ARTIFACT_STATE_REPRODUCIBILITY_GOVERNANCE_EN.md,canonical_governance,"artifact identity, registries, reproducibility, delivery and release governance",TASK_ROUTED
+08,governance/HOST_MEMORY_LANGUAGE_EN.md,canonical_host_governance,"evidence hierarchy, recovery, transcript provenance, irreversible actions, audit and language",TASK_ROUTED

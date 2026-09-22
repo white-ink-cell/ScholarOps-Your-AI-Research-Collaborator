@@ -1,0 +1,1799 @@
+schema_version: 3.0.0
+release:
+  lineage_id: SCHOLAROPS_RESEARCH
+  package_id: SCHOLAROPS
+  version: 1.0.0
+  status: STABLE
+  supersedes: ''
+  architecture: SCHEMA_DRIVEN_GENERATED_RUNTIME
+  skill_root: skills/scholarops
+toolchain:
+  builder_version: 3.0.0
+  validator_version: 5.1.0
+  mutation_suite_version: 3.0.0
+fingerprint:
+  algorithm: SHA256_OVER_SORTED_NORMALIZED_PATH_DIGEST_LINES
+  newline_normalization: CRLF_AND_CR_TO_LF
+  line_format: '{relpath}:{sha256_of_normalized_bytes}'
+  joiner: '
+
+    '
+  scope:
+  - skills/scholarops/00_CANONICAL_INDEX_EN.md
+  - skills/scholarops/SKILL.md
+  - skills/scholarops/modules/01_CORE_RESEARCH_WORKFLOW_EN.md
+  - skills/scholarops/modules/02_EMPIRICAL_DATA_PILOT_METHODS_EN.md
+  - skills/scholarops/profiles/ai-finance/PROFILE_EN.md
+  - skills/scholarops/modules/04_ACCESS_INTERFACE_EN.md
+  - skills/scholarops/modules/05_PROJECT_STATE_EN.md
+  - skills/scholarops/modules/06_SPECIALIZED_DESIGN_EVALUATION_GATES_EN.md
+  - skills/scholarops/modules/07_ARTIFACT_STATE_REPRODUCIBILITY_GOVERNANCE_EN.md
+  - skills/scholarops/governance/HOST_MEMORY_LANGUAGE_EN.md
+  - spec/SKILL_SPEC.yaml
+  - spec/SKILL_SPEC_SCHEMA.json
+  - tooling/build_runtime.py
+  - tooling/validate_runtime.py
+  - tests/validate_source_runtime.py
+  excluded_and_why:
+    skills/scholarops/runtime/*: deterministically generated from source spec and semantic modules; independently drift-checked
+    skills/scholarops/references/METHOD_SOURCE_REGISTRY.csv: deterministically generated from the source spec
+    README files: human-facing release documentation is built only after canonical English stabilizes
+    Chinese human-facing files: derived later from stable canonical English and reviewed for semantic equivalence
+reserved_state_ids:
+- state_id: S14
+  reason: former EXPLICIT_USER_PILOT_START; folded into S13 allowed_next guard PILOT_START_AUTHORIZATION=EXPLICIT_USER_AUTHORIZATION
+  retired_in: 6.0.0
+precedence_chain:
+- CANONICAL_VERSION_RESOLUTION
+- RE
+- AU
+- CONCRETE_RESEARCH_TASK
+metadata_policy:
+  identity_only: true
+  forbidden_metadata_keys:
+  - RELEASE_VALIDATION_STATUS
+  - MUTATION_TEST_STATUS
+  - SEMANTIC_AUDIT_STATUS
+  - TASK_CLOSURE_STATUS
+  - TASK_CLOSURE_DEPTH
+  - REVALIDATE_AFTER_LAST_CHANGE
+  rationale: a package may not certify itself; verdicts live in release_evidence/ and in the detached attestation outside the ZIP
+modules:
+- id: '00'
+  path: 00_CANONICAL_INDEX_EN.md
+  role: canonical_loader
+  description: product scope, loading, command precedence, host and recovery boundaries
+  load_policy: LOADER
+- id: '01'
+  path: modules/01_CORE_RESEARCH_WORKFLOW_EN.md
+  role: canonical_core
+  description: research questions, literature, contribution adjudication, claim discipline
+  load_policy: TASK_ROUTED
+- id: '02'
+  path: modules/02_EMPIRICAL_DATA_PILOT_METHODS_EN.md
+  role: canonical_empirical
+  description: data, measurement, blindness, screens, formal empirical execution
+  load_policy: TASK_ROUTED
+- id: '03'
+  path: profiles/ai-finance/PROFILE_EN.md
+  role: optional_domain_profile
+  description: AI x Finance specialization only
+  load_policy: OPTIONAL_PROFILE
+- id: '04'
+  path: modules/04_ACCESS_INTERFACE_EN.md
+  role: canonical_access
+  description: platform-neutral data/resource access and assistant-first execution
+  load_policy: TASK_ROUTED
+- id: '05'
+  path: modules/05_PROJECT_STATE_EN.md
+  role: canonical_project_state
+  description: multi-project state, isolation, hold/close/reopen governance
+  load_policy: TASK_ROUTED
+- id: '06'
+  path: modules/06_SPECIALIZED_DESIGN_EVALUATION_GATES_EN.md
+  role: canonical_specialized
+  description: specialized experiment/evaluation/human-subject/cost-quality gates
+  load_policy: TRIGGERED_MODULE
+- id: '07'
+  path: modules/07_ARTIFACT_STATE_REPRODUCIBILITY_GOVERNANCE_EN.md
+  role: canonical_governance
+  description: artifact identity, registries, reproducibility, delivery and release governance
+  load_policy: TASK_ROUTED
+- id: 08
+  path: governance/HOST_MEMORY_LANGUAGE_EN.md
+  role: canonical_host_governance
+  description: evidence hierarchy, recovery, transcript provenance, irreversible actions, audit and language
+  load_policy: TASK_ROUTED
+commands:
+- token: RE
+  case_insensitive: true
+  mode_field: RECOVERY_MODE
+  mode_value: 'ON'
+  action: PROJECT_STATE_RECOVERY
+  precedence: 10
+  alone_stop: true
+  description: Recover canonical project state from structured state and registered artifacts; consult archived conversation evidence only when
+    needed; do not auto-advance when RE is the only request.
+- token: AU
+  case_insensitive: true
+  mode_field: AUDIT_MODE
+  mode_value: 'ON'
+  action: CURRENT_WORKFLOW_AUDIT
+  precedence: 20
+  alone_stop: true
+  description: Audit the current research workflow and identify the earliest material gap or inconsistency; do not auto-advance when AU is the
+    only request.
+fields:
+- field: CURRENT_CANONICAL_VERSION
+  allowed_values:
+  - v1.0.0
+  type: singleton
+- field: CANONICAL_ARCHITECTURE
+  allowed_values:
+  - SCHEMA_DRIVEN_GENERATED_RUNTIME
+  type: singleton
+- field: OUTCOME_SCREEN_APPLICABILITY
+  allowed_values:
+  - APPLICABLE
+  - NOT_APPLICABLE
+  - BLOCKED
+  type: enum
+- field: SCREEN_DATA_REUSE_POLICY
+  allowed_values:
+  - EXTERNAL_HOLDOUT
+  - BLINDED_INTERNAL_NUISANCE_ONLY
+  - VALID_ADAPTIVE_SEQUENTIAL_REUSE
+  - EXPLORATORY_REUSE_ONLY
+  - NOT_APPLICABLE
+  type: enum
+- field: COLLISION_EVIDENCE_TIER
+  allowed_values:
+  - PEER_REVIEWED_CORE
+  - PEER_REVIEWED_ADJACENT
+  - CANONICAL_HIGH_QUALITY
+  - HIGH_AUTHORITY_FRONTIER
+  - LOW_AUTHORITY_FRONTIER
+  - SEARCH_PROCESS_ONLY
+  - NOT_APPLICABLE
+  type: enum
+- field: REVISION_TRIGGER
+  allowed_values:
+  - UPSTREAM_SOURCE
+  - DESIGN_PRESPECIFIED
+  - OUTCOME_DRIVEN
+  - UNDETERMINED
+  - NOT_APPLICABLE
+  type: enum
+- field: IRREVERSIBLE_ACTION_STATUS
+  allowed_values:
+  - NONE
+  - WARNING_ONLY
+  - FATAL_ERROR_RECOVERABLE
+  - IRREVERSIBLE_DONE
+  type: enum
+- field: EMPIRICAL_ENTRY_STATUS
+  allowed_values:
+  - RESOLVED
+  - UNRESOLVED_BLOCKED
+  - USER_OVERRIDE_EXPLORATORY
+  - NOT_APPLICABLE
+  type: enum
+- field: ASSET_MUTABILITY
+  allowed_values:
+  - FROZEN_SNAPSHOT
+  - LIVE_SOURCE
+  - UNKNOWN
+  type: enum
+- field: VERIFICATION_REUSE_DECISION
+  allowed_values:
+  - FIRST_VERIFICATION
+  - REUSED_UNCHANGED
+  - REVERIFIED_TRIGGERED
+  - BLOCKED_UNVERIFIABLE
+  type: enum
+- field: BLINDING_IMPLEMENTATION_MODE
+  allowed_values:
+  - TREATMENT_LABEL_MASKED
+  - OUTCOME_MASKED
+  - SHUFFLED_LABEL
+  - SYNTHETIC_OUTCOME
+  - HOLDOUT
+  - LOCKED_SPEC_ONLY
+  - NOT_FEASIBLE
+  type: enum
+- field: BACKGROUND_DATA_FAMILIARITY
+  allowed_values:
+  - NONE
+  - GENERAL_DISTRIBUTIONAL
+  - EXTENSIVE_PRIOR_USE
+  type: enum
+- field: SPECIFICATION_SEARCH_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: LITERATURE_SELECTION_HURDLE_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: PRECEDENT_TRANSFER_STATUS
+  allowed_values:
+  - TRANSFERABLE_AS_IS
+  - TRANSFERABLE_WITH_ADAPTATION
+  - NOT_TRANSFERABLE_AS_IS
+  - NOT_ASSESSED
+  type: enum
+- field: TERMINATION_REASON
+  allowed_values:
+  - CENSUS_STOP
+  - L4_STOP
+  - SCREEN_STOP_RESOURCE
+  - EXECUTION_STRUCTURALLY_BLOCKED
+  - CLAIM_DRIFT_SUPERSEDED
+  - USER_DECISION
+  - OTHER
+  type: enum
+- field: TERMINATION_ARCHIVE_STATUS
+  allowed_values:
+  - IN_PROGRESS
+  - COMPLETE
+  - NOT_APPLICABLE
+  type: enum
+- field: CONDITION_TYPE
+  allowed_values:
+  - PENDING_EXTERNAL_INPUT
+  - PENDING_USER_DECISION
+  - BOUNDED_KNOWN_DEFECT
+  - SCOPE_LIMITED
+  - NOT_APPLICABLE
+  type: enum
+- field: MILESTONE_CLASS
+  allowed_values:
+  - PRE_L4_CLAIM_FREEZE
+  - METHOD_OR_DATA_FREEZE
+  - FREEZE_A_SCREEN_DECISION
+  - SCREEN_RESULT_HANDOFF
+  - PRE_FORMAL_L4_HANDOFF
+  - FREEZE_B_FORMAL_MAIN_SPEC
+  - FORMAL_MAIN_RESULT
+  - FORMAL_DATASET_RELEASE
+  - FORMAL_CODE_RELEASE
+  - CROSS_CONVERSATION_CANONICAL_HANDOFF
+  - FINAL_PAPER_OR_MAJOR_SECTION
+  - SKILL_RELEASE
+  - ARCHIVE
+  - TERMINATED_BRANCH_ARCHIVE
+  - NOT_APPLICABLE
+  type: enum
+- field: SEEN_DATA_STATUS
+  allowed_values:
+  - NONE
+  - BLIND_DIAGNOSTIC_ONLY
+  - EFFECT_SEEN
+  - UNKNOWN
+  type: enum
+- field: EXECUTION_BLOCKER_CLASS
+  allowed_values:
+  - ENTITLEMENT_OR_ACCESS
+  - COST
+  - ETHICS_OR_APPROVAL
+  - RECRUITMENT_OR_LABEL_SUPPLY
+  - TOOLING_OR_ENVIRONMENT
+  - TIME_BUDGET
+  - NONE
+  - NOT_APPLICABLE
+  type: enum
+- field: GENERATED_DRIFT
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  type: enum
+- field: FINGERPRINT_STATUS
+  allowed_values:
+  - MATCH
+  - MISMATCH
+  - NOT_DECLARED
+  type: enum
+- field: ATTESTATION_STATUS
+  allowed_values:
+  - PRESENT_AND_MATCHING
+  - PRESENT_AND_MISMATCHED
+  - ABSENT
+  - NOT_APPLICABLE
+  type: enum
+- field: CENSUS_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - CENSUS_PARTIAL
+  - CENSUS_COMPLETE_PRE_L4
+  type: enum
+- field: RESEARCH_CENSUS_VERDICT
+  allowed_values:
+  - STOP_COLLISION
+  - STOP_SO_WHAT
+  - STOP_CONSTRUCT
+  - NARROW
+  - PASS_TO_PRE_L4
+  type: enum
+- field: PRE_L4_EXECUTION_READINESS
+  allowed_values:
+  - READY
+  - CONDITIONAL
+  - TEMPORARILY_BLOCKED
+  - STRUCTURALLY_BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: L4_PHASE
+  allowed_values:
+  - PRE_PILOT
+  - PRE_FORMAL_RECHECK
+  type: enum
+- field: L4_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - BLOCKED
+  - PARKED_BLOCKED
+  - TERMINATED_EARLY
+  - RETURNED_FOR_REFREEZE
+  - COMPLETE
+  type: enum
+- field: L4_VERDICT
+  allowed_values:
+  - L4_STOP_COLLISION
+  - L4_STOP_SO_WHAT
+  - L4_STOP_CONSTRUCT
+  - L4_BLOCKED_EVIDENCE
+  - L4_BLOCKED_ACCESS
+  - L4_NARROW
+  - L4_PASS_TO_METHOD_DESIGN
+  - NOT_ADJUDICATED_CLAIM_DRIFT
+  type: enum
+- field: METHOD_DESIGN_STATUS
+  allowed_values:
+  - PASS
+  - REVISE
+  - BLOCKED
+  - RETURN_FOR_REFREEZE
+  - STOP
+  type: enum
+- field: REALITY_ACCESS_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  type: enum
+- field: RAW_DATA_QA_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: DERIVED_VARIABLE_CONSTRUCTION_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: BLIND_DISTRIBUTION_AUDIT_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: CLEANING_TRANSFORMATION_FREEZE_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: CLEAN_PANEL_QA_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: DATA_IDENTITY_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  type: enum
+- field: MEASUREMENT_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  type: enum
+- field: SCREEN_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - BLOCKED
+  - REPAIRING
+  - COMPLETE
+  - NOT_APPLICABLE
+  type: enum
+- field: SCREEN_VERDICT
+  allowed_values:
+  - CONTINUE
+  - CONTINUE_WITH_REVISION
+  - STOP_RESOURCE_ALLOCATION
+  - NOT_ADJUDICATED
+  - NOT_APPLICABLE
+  type: enum
+- field: BLINDNESS_LEVEL
+  allowed_values:
+  - B0_STRUCTURE_ONLY
+  - B1_MARGINAL_OUTCOME_BLIND
+  - B2_DESIGN_SUPPORT_EFFECT_MASKED
+  - B3_EFFECT_OPEN
+  type: enum
+- field: FREEZE_LAYER
+  allowed_values:
+  - FREEZE_A_SCREEN_DECISION
+  - FREEZE_B_FORMAL_MAIN_SPEC
+  type: enum
+- field: FAILURE_CLASS
+  allowed_values:
+  - NOVELTY_OR_REDUNDANCY
+  - SO_WHAT_OR_CONCEPTUAL
+  - ACCESS
+  - IMPLEMENTATION
+  - DATA_IDENTITY
+  - DATA_QUALITY
+  - MEASUREMENT
+  - SAMPLE_SUPPORT_OR_PRECISION
+  - CONSTRUCT
+  - IDENTIFICATION
+  - ESTIMATOR_OR_INFERENCE
+  - ECONOMIC_CRITERION
+  - MULTIPLE
+  - NOT_YET_CLASSIFIED
+  type: enum
+- field: PATH_TYPE
+  allowed_values:
+  - PROJECT_LOCAL
+  - PROJECT_WORKSPACE
+  - HOST_STORAGE_REF
+  - CONNECTED_SOURCE_REF
+  - EXTERNAL_SOURCE
+  - UNKNOWN
+  type: enum
+- field: MISSING_DATA_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: IMPUTATION_DECISION
+  allowed_values:
+  - NO_IMPUTATION
+  - POINT_IN_TIME_IMPUTATION
+  - MODEL_BASED_IMPUTATION
+  - EXPLORATORY_ONLY
+  - NOT_APPLICABLE
+  type: enum
+- field: SESSION_CONTEXT_STATUS
+  allowed_values:
+  - NOT_REQUIRED
+  - REQUIRED
+  - COMPLETE
+  - BLOCKED
+  type: enum
+- field: LATEST_TRANSCRIPT_FULL_LINEAR_READ
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  - NOT_APPLICABLE
+  type: enum
+- field: CONCRETE_PROBLEM_SPECIAL_CASE
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  type: enum
+- field: METHOD_GAP
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  type: enum
+- field: WITHIN_STUDY_MULTIPLICITY_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: HYPOTHESIS_ROLE
+  allowed_values:
+  - PRIMARY
+  - CO_PRIMARY
+  - SECONDARY_CONFIRMATORY
+  - EXPLORATORY
+  type: enum
+- field: MULTIPLICITY_CLAIM_LOGIC
+  allowed_values:
+  - ANY_OF_MANY
+  - ALL_CO_PRIMARY_REQUIRED
+  - ORDERED_HIERARCHY
+  - OMNIBUS_OR_INDEX_FIRST
+  - DISCOVERY_FAMILY
+  - SEPARATE_SCIENTIFIC_CLAIMS
+  type: enum
+- field: MULTIPLICITY_ERROR_CRITERION
+  allowed_values:
+  - FWER
+  - FDR
+  - HIERARCHICAL_GATEKEEPING
+  - OMNIBUS_OR_INDEX
+  - PROJECT_SPECIFIC
+  - NOT_APPLICABLE
+  type: enum
+- field: THRESHOLD_CONFLICT_STATUS
+  allowed_values:
+  - NONE
+  - RESOLVED_PRE_B3
+  - THRESHOLD_SET_FROZEN
+  - UNRESOLVED
+  - NOT_APPLICABLE
+  type: enum
+- field: THRESHOLD_SENSITIVE
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  - NOT_APPLICABLE
+  type: enum
+- field: PRE_FORMAL_L4_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - BLOCKED
+  - COMPLETE
+  - RETURNED_FOR_REFREEZE
+  type: enum
+- field: PRE_FORMAL_L4_VERDICT
+  allowed_values:
+  - STOP_COLLISION
+  - STOP_SO_WHAT
+  - STOP_CONSTRUCT
+  - NARROW
+  - PASS_TO_FORMAL_IDENTIFICATION
+  - BLOCKED_EVIDENCE
+  - RETURN_FOR_REFREEZE
+  type: enum
+- field: CANONICAL_VERSION_STATUS
+  allowed_values:
+  - RESOLVED
+  - VERSION_COLLISION
+  - BRANCH_AMBIGUITY
+  - NO_STABLE_RELEASE
+  - NOT_APPLICABLE
+  type: enum
+- field: RELEASE_STATUS
+  allowed_values:
+  - STABLE
+  - DRAFT
+  - PRERELEASE
+  - DEPRECATED
+  type: enum
+- field: TRANSCRIPT_COMPLETENESS_STATUS
+  allowed_values:
+  - VERIFIED_COMPLETE
+  - OPERATIONALLY_COMPLETE
+  - PARTIAL
+  - UNKNOWN
+  - NOT_APPLICABLE
+  type: enum
+- field: TRANSCRIPT_GAP_IMPACT
+  allowed_values:
+  - NONE
+  - NON_MATERIAL
+  - MATERIAL
+  - UNKNOWN
+  - NOT_APPLICABLE
+  type: enum
+- field: AUDIT_MODE
+  allowed_values:
+  - 'ON'
+  - 'OFF'
+  type: enum
+- field: AUDIT_SCOPE
+  allowed_values:
+  - CURRENT_WORKFLOW
+  - PROJECT_STATE
+  - CURRENT_CONVERSATION
+  - NOT_APPLICABLE
+  type: enum
+- field: WORKFLOW_AUDIT_STATUS
+  allowed_values:
+  - PASS
+  - PASS_WITH_GAPS
+  - BLOCKED
+  type: enum
+- field: GATE_ACTIVATION_CLASS
+  allowed_values:
+  - ALWAYS_ON
+  - TRIGGERED
+  - MILESTONE_ONLY
+  - STALE_OR_CHANGED_ONLY
+  - NOT_APPLICABLE
+  type: enum
+- field: ECONOMIC_THRESHOLD_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: MISSING_FULL_AUDIT_TRIGGER
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  - NOT_APPLICABLE
+  type: enum
+- field: CLEAN_DATA_CHANGE_STATUS
+  allowed_values:
+  - NO_DATA_CHANGE
+  - VALUES_CHANGED
+  - SAMPLE_CHANGED
+  - TRANSFORMATION_CHANGED
+  - AGGREGATION_CHANGED
+  - MULTIPLE_CHANGES
+  type: enum
+- field: PRE_FORMAL_L4_MODE
+  allowed_values:
+  - SENTINEL_ONLY
+  - FULL_UPDATE
+  - RETURN_FOR_REFREEZE
+  type: enum
+- field: SCREEN_START_AUTHORIZATION
+  allowed_values:
+  - EXPLICIT_USER_AUTHORIZATION
+  - NOT_AUTHORIZED
+  type: enum
+- field: FREEZE_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - BLOCKED
+  - COMPLETE
+  type: enum
+- field: EMPIRICAL_EXECUTION_CLASS
+  allowed_values:
+  - TECHNICAL_PROBE
+  - PREOUTCOME_MEASUREMENT_VALIDATION
+  - OUTCOME_DECISION_SCREEN
+  - FORMAL_STUDY
+  type: enum
+- field: SYSTEM_IDENTITY_STATUS
+  allowed_values:
+  - PASS
+  - CONDITIONAL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: FORMAL_MAIN_RESULT_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - BLOCKED
+  - COMPLETE
+  type: enum
+- field: CLAIM_DRIFT
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  type: enum
+- field: HUMAN_SUBJECTS_REQUIRED
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  - CONDITIONAL
+  type: enum
+- field: QUESTION_FORMATION_STATUS
+  allowed_values:
+  - PASS
+  - REVISE
+  - BLOCKED
+  type: enum
+- field: PRE_L4_CLAIM_FREEZE_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - BLOCKED
+  - COMPLETE
+  type: enum
+- field: FORMAL_IDENTIFICATION_STATUS
+  allowed_values:
+  - PASS
+  - REVISE
+  - BLOCKED
+  - RETURN_FOR_REFREEZE
+  type: enum
+- field: MECHANISM_ROBUSTNESS_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - BLOCKED
+  - COMPLETE
+  - NOT_APPLICABLE
+  type: enum
+- field: WRITING_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - BLOCKED
+  - COMPLETE
+  type: enum
+- field: ARCHIVE_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - BLOCKED
+  - COMPLETE
+  type: enum
+- field: MULTIPLICITY_LEDGER_REQUIRED
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  type: enum
+- field: TASK_CLOSURE_STATUS
+  allowed_values:
+  - NOT_STARTED
+  - IN_PROGRESS
+  - PASS
+  - FAIL
+  - BLOCKED
+  - NOT_APPLICABLE
+  type: enum
+- field: TASK_CLOSURE_DEPTH
+  allowed_values:
+  - LIGHT
+  - MILESTONE
+  type: enum
+- field: REVALIDATE_AFTER_LAST_CHANGE
+  allowed_values:
+  - 'YES'
+  - 'NO'
+  - NOT_APPLICABLE
+  type: enum
+- field: RECOVERY_MODE
+  allowed_values:
+  - 'ON'
+  - 'OFF'
+  type: enum
+states:
+- state_id: S00
+  state: AGENDA_QUESTION_FORMATION
+  owner: 01_CORE
+  entry: problem/actor/construct/so-what
+  required_artifact: question memo
+  pass_condition: QUESTION_FORMATION_STATUS=PASS
+  allowed_next: S01
+  return_or_failure: revise question
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S01
+  state: LANDSCAPE_DISCOVERY
+  owner: 01_CORE or 03_AI_FINANCE_PROFILE when explicitly triggered
+  entry: QUESTION_FORMATION_STATUS=PASS
+  required_artifact: landscape package
+  pass_condition: CENSUS_STATUS=CENSUS_PARTIAL
+  allowed_next: S02
+  return_or_failure: S00
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S02
+  state: FOCUSED_CENSUS
+  owner: 01_CORE
+  entry: CENSUS_STATUS=CENSUS_PARTIAL
+  required_artifact: census audit package
+  pass_condition: CENSUS_STATUS=CENSUS_COMPLETE_PRE_L4 & RESEARCH_CENSUS_VERDICT=PASS_TO_PRE_L4
+  allowed_next: S03
+  return_or_failure: RESEARCH_CENSUS_VERDICT=NARROW→S00; RESEARCH_CENSUS_VERDICT∈{STOP_COLLISION,STOP_SO_WHAT,STOP_CONSTRUCT}→S24; incomplete→S01
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S03
+  state: PRE_L4_CLAIM_FREEZE
+  owner: 01_CORE
+  entry: CENSUS_STATUS=CENSUS_COMPLETE_PRE_L4 + RESEARCH_CENSUS_VERDICT=PASS_TO_PRE_L4
+  required_artifact: PRE_L4_CLAIM_FREEZE
+  pass_condition: PRE_L4_CLAIM_FREEZE_STATUS=COMPLETE
+  allowed_next: S04
+  return_or_failure: S02
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S04
+  state: PRE_PILOT_L4
+  owner: 01_CORE
+  entry: PRE_L4_CLAIM_FREEZE_STATUS=COMPLETE
+  required_artifact: L4 package
+  pass_condition: L4_PHASE=PRE_PILOT & L4_STATUS=COMPLETE & L4_VERDICT=L4_PASS_TO_METHOD_DESIGN
+  allowed_next: S05
+  return_or_failure: L4_VERDICT=L4_NARROW→S03; L4_VERDICT∈{L4_STOP_COLLISION,L4_STOP_SO_WHAT,L4_STOP_CONSTRUCT}→S24; blocked/refreeze→hold-or-S03
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S05
+  state: METHOD_DESIGN_IDENTIFICATION_MINIMUM
+  owner: 02_EMPIRICAL
+  entry: L4_PHASE=PRE_PILOT + L4_STATUS=COMPLETE + L4_VERDICT=L4_PASS_TO_METHOD_DESIGN
+  required_artifact: design spec + pre-pilot identification minimum; system identity spec only if triggered
+  pass_condition: METHOD_DESIGN_STATUS=PASS
+  allowed_next: S06
+  return_or_failure: S03/S04
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S06
+  state: REALITY_ACCESS
+  owner: 04_ACCESS + project-specific access context
+  entry: METHOD_DESIGN_STATUS=PASS
+  required_artifact: access audit
+  pass_condition: REALITY_ACCESS_STATUS=PASS
+  allowed_next: S07
+  return_or_failure: BLOCK
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S07
+  state: DATA_ASSET_INTAKE_RAW_QA
+  owner: 02_EMPIRICAL
+  entry: REALITY_ACCESS_STATUS=PASS
+  required_artifact: raw QA
+  pass_condition: RAW_DATA_QA_STATUS=PASS
+  allowed_next: S08
+  return_or_failure: repair S07
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S08
+  state: DERIVED_VARIABLE_CONSTRUCTION
+  owner: 02_EMPIRICAL
+  entry: RAW_DATA_QA_STATUS=PASS
+  required_artifact: derived dataset
+  pass_condition: DERIVED_VARIABLE_CONSTRUCTION_STATUS=PASS
+  allowed_next: S09
+  return_or_failure: S07/S08
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S09
+  state: BLIND_DATA_REALITY_AUDIT
+  owner: 02_EMPIRICAL
+  entry: DERIVED_VARIABLE_CONSTRUCTION_STATUS=PASS + BLINDNESS_LEVEL=B1_MARGINAL_OUTCOME_BLIND
+  required_artifact: blind distribution/tail audit + cheap missing triage; full missing map only if triggered
+  pass_condition: BLIND_DISTRIBUTION_AUDIT_STATUS=PASS & MISSING_DATA_STATUS∈{PASS,NOT_APPLICABLE}
+  allowed_next: S10
+  return_or_failure: S08
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S10
+  state: CLEANING_TRANSFORMATION_SCALE_FREEZE
+  owner: 02_EMPIRICAL
+  entry: BLIND_DISTRIBUTION_AUDIT_STATUS=PASS + MISSING_DATA_STATUS∈{PASS,NOT_APPLICABLE}
+  required_artifact: cleaning/transform/scale decision; missing/imputation decision only if MISSING_FULL_AUDIT_TRIGGER=YES
+  pass_condition: CLEANING_TRANSFORMATION_FREEZE_STATUS=PASS
+  allowed_next: S11
+  return_or_failure: S09
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S11
+  state: REBUILD_CLEAN_PANEL_QA
+  owner: 02_EMPIRICAL
+  entry: CLEANING_TRANSFORMATION_FREEZE_STATUS=PASS
+  required_artifact: clean panel; full post-clean QA only if data/sample/transform/aggregation changed
+  pass_condition: CLEAN_PANEL_QA_STATUS=PASS
+  allowed_next: S12
+  return_or_failure: S10
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S12
+  state: DATA_IDENTITY_AND_PREOUTCOME_MEASUREMENT_VALIDATION
+  owner: 02_EMPIRICAL
+  entry: CLEAN_PANEL_QA_STATUS=PASS + EMPIRICAL_EXECUTION_CLASS=PREOUTCOME_MEASUREMENT_VALIDATION before any outcome-bearing execution
+  required_artifact: identity/measurement audit; SYSTEM_IDENTITY_STATUS if triggered
+  pass_condition: DATA_IDENTITY_STATUS=PASS & MEASUREMENT_STATUS=PASS & SYSTEM_IDENTITY_STATUS∈{PASS,NOT_APPLICABLE}
+  allowed_next: S13
+  return_or_failure: repair/refreeze
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S13
+  state: FREEZE_A_SCREEN_DECISION_AND_REUSE_POLICY
+  owner: 02_EMPIRICAL
+  entry: DATA_IDENTITY_STATUS=PASS + MEASUREMENT_STATUS=PASS + SYSTEM_IDENTITY_STATUS∈{PASS,NOT_APPLICABLE}
+  required_artifact: FREEZE_A record; screen applicability decision; SCREEN_DATA_REUSE_POLICY frozen before any effect is opened
+  pass_condition: OUTCOME_SCREEN_APPLICABILITY∈{APPLICABLE,NOT_APPLICABLE} & SCREEN_DATA_REUSE_POLICY frozen & WITHIN_STUDY_MULTIPLICITY_STATUS∈{PASS,NOT_APPLICABLE}
+    & BLINDNESS_LEVEL∈{B0_STRUCTURE_ONLY,B1_MARGINAL_OUTCOME_BLIND,B2_DESIGN_SUPPORT_EFFECT_MASKED}
+  allowed_next: OUTCOME_SCREEN_APPLICABILITY=APPLICABLE & SCREEN_START_AUTHORIZATION=EXPLICIT_USER_AUTHORIZATION→S15; OUTCOME_SCREEN_APPLICABILITY=NOT_APPLICABLE→S17
+  return_or_failure: return exact upstream; OUTCOME_SCREEN_APPLICABILITY=BLOCKED→resolve before proceeding
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S15
+  state: OUTCOME_DECISION_SCREEN_EFFECT_OPEN
+  owner: 02_EMPIRICAL
+  entry: EMPIRICAL_EXECUTION_CLASS=OUTCOME_DECISION_SCREEN + SCREEN_DATA_REUSE_POLICY frozen + SCREEN_START_AUTHORIZATION=EXPLICIT_USER_AUTHORIZATION
+  required_artifact: screen execution log; SEEN_DATA_STATUS updated at effect open
+  pass_condition: SCREEN_STATUS=COMPLETE & BLINDNESS_LEVEL=B3_EFFECT_OPEN
+  allowed_next: S16
+  return_or_failure: diagnose/repair at the diagnosed failure layer only
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S16
+  state: SCREEN_DIAGNOSIS_AND_RESOURCE_ADJUDICATION
+  owner: 02_EMPIRICAL
+  entry: SCREEN_STATUS=COMPLETE
+  required_artifact: SCREEN_FAILURE_DIAGNOSIS when abnormal; resource-allocation verdict
+  pass_condition: SCREEN_STATUS=COMPLETE & SCREEN_VERDICT∈{CONTINUE,CONTINUE_WITH_REVISION,STOP_RESOURCE_ALLOCATION,NOT_ADJUDICATED}
+  allowed_next: SCREEN_VERDICT∈{CONTINUE,CONTINUE_WITH_REVISION}→S17; SCREEN_VERDICT=STOP_RESOURCE_ALLOCATION→S24; SCREEN_VERDICT=NOT_ADJUDICATED→return
+  return_or_failure: repair only at diagnosed failure layer; claim-changing repair→new branch; the screen never establishes an economic null
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S17
+  state: PRE_FORMAL_L4_RECHECK
+  owner: 01_CORE
+  entry: SCREEN_VERDICT∈{CONTINUE,CONTINUE_WITH_REVISION} or OUTCOME_SCREEN_APPLICABILITY=NOT_APPLICABLE
+  required_artifact: freshness sentinel or full update record; literature-selection hurdle assessment
+  pass_condition: L4_PHASE=PRE_FORMAL_RECHECK & PRE_FORMAL_L4_STATUS=COMPLETE & PRE_FORMAL_L4_VERDICT=PASS_TO_FORMAL_IDENTIFICATION & LITERATURE_SELECTION_HURDLE_STATUS∈{PASS,NOT_APPLICABLE}
+  allowed_next: S18
+  return_or_failure: PRE_FORMAL_L4_VERDICT∈{STOP_COLLISION,STOP_SO_WHAT,STOP_CONSTRUCT}→S24; RETURN_FOR_REFREEZE→refreeze
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S18
+  state: FORMAL_IDENTIFICATION_STRENGTHENING
+  owner: 02_EMPIRICAL
+  entry: PRE_FORMAL_L4_STATUS=COMPLETE + PRE_FORMAL_L4_VERDICT=PASS_TO_FORMAL_IDENTIFICATION
+  required_artifact: formal design/inference plan
+  pass_condition: FORMAL_IDENTIFICATION_STATUS=PASS
+  allowed_next: S19
+  return_or_failure: FORMAL_IDENTIFICATION_STATUS∈{REVISE,RETURN_FOR_REFREEZE}→refreeze; FORMAL_IDENTIFICATION_STATUS=BLOCKED→hold
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S19
+  state: FREEZE_B_FORMAL_MAIN_SPEC
+  owner: 02_EMPIRICAL
+  entry: FORMAL_IDENTIFICATION_STATUS=PASS + EMPIRICAL_EXECUTION_CLASS=FORMAL_STUDY
+  required_artifact: Freeze B formal main-spec record
+  pass_condition: FREEZE_LAYER=FREEZE_B_FORMAL_MAIN_SPEC & FREEZE_STATUS=COMPLETE & SPECIFICATION_SEARCH_STATUS∈{PASS,NOT_APPLICABLE} & ECONOMIC_THRESHOLD_STATUS∈{PASS,NOT_APPLICABLE}
+    & SCREEN_DATA_REUSE_POLICY honoured in the frozen sample rule
+  allowed_next: S20
+  return_or_failure: CLAIM_DRIFT=YES→refreeze/new branch
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S20
+  state: FORMAL_MAIN_ESTIMATION_AND_RESULT_QA
+  owner: 02_EMPIRICAL
+  entry: FREEZE_LAYER=FREEZE_B_FORMAL_MAIN_SPEC + FREEZE_STATUS=COMPLETE + EMPIRICAL_EXECUTION_CLASS=FORMAL_STUDY
+  required_artifact: formal main results + execution/result QA + Seen Data update
+  pass_condition: FORMAL_MAIN_RESULT_STATUS=COMPLETE
+  allowed_next: S21
+  return_or_failure: implementation/data bug→legal repair and rerun frozen spec; claim-changing issue→new branch/refreeze
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S21
+  state: MECHANISM_ROBUSTNESS_IF_TRIGGERED
+  owner: 01_CORE + 02_EMPIRICAL + project method
+  entry: FORMAL_MAIN_RESULT_STATUS=COMPLETE
+  required_artifact: mechanism/robustness package only if triggered
+  pass_condition: MECHANISM_ROBUSTNESS_STATUS∈{COMPLETE,NOT_APPLICABLE}
+  allowed_next: S22
+  return_or_failure: result-driven new tests remain EXPLORATORY
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S22
+  state: WRITING_CLAIM_CEILING
+  owner: 01_CORE + 07_GOVERNANCE
+  entry: FORMAL_MAIN_RESULT_STATUS=COMPLETE + MECHANISM_ROBUSTNESS_STATUS∈{COMPLETE,NOT_APPLICABLE}
+  required_artifact: paper/exhibits/claim ceiling
+  pass_condition: WRITING_STATUS=COMPLETE
+  allowed_next: S23
+  return_or_failure: revise writing only; no confirmatory redesign
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S24
+  state: TERMINATED_BRANCH_ARCHIVE
+  owner: 07_GOVERNANCE
+  entry: any STOP or STOP_RESOURCE_ALLOCATION verdict from S02, S04, S06, S16 or S17
+  required_artifact: termination record with reusable assets, cooldown key and reopen conditions
+  pass_condition: TERMINATION_ARCHIVE_STATUS=COMPLETE & TERMINATION_REASON recorded & FAILURE_CLASS recorded & SEEN_DATA_STATUS recorded
+  allowed_next: END
+  return_or_failure: reopen only via GOV-COOLDOWN01 with auditable new evidence
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+- state_id: S23
+  state: ARCHIVE_REGISTRY
+  owner: 07_GOVERNANCE
+  entry: WRITING_STATUS=COMPLETE
+  required_artifact: archive/registry/release
+  pass_condition: ARCHIVE_STATUS=COMPLETE
+  allowed_next: END
+  return_or_failure: '-'
+  global_precondition: SESSION_CONTEXT_STATUS∈{COMPLETE,NOT_REQUIRED}
+tasks:
+- task_class: PROJECT_RECOVERY
+  trigger_examples: RE; resume this research project; continue prior staged research; recover project state
+  required_modules: 00 + 08 + 07; then task modules only if a separate task is present
+  routing_note: Recover structured canonical state first; validate against registered artifacts; consult archived conversation evidence only if
+    needed; respect Seen Data boundaries; RE alone stops after recovery.
+- task_class: WORKFLOW_AUDIT
+  trigger_examples: AU; audit the current research workflow; trace the earliest material gap
+  required_modules: 00 + 08 + 07 + modules actually used by the current workflow
+  routing_note: Audit already-performed work and return the earliest material gap or inconsistency. AU alone does not advance the research state.
+- task_class: RESEARCH_QUESTION_FORMATION
+  trigger_examples: form a research question; screen candidate research problems; define actor/construct/estimand/so-what
+  required_modules: 00 + 01 + 05 + 07 + 08
+  routing_note: Apply question/contribution governance without forcing empirical or AI-specific modules.
+- task_class: LITERATURE_SEARCH
+  trigger_examples: literature search; focused census; collision screening; novelty/contribution adjudication; L4
+  required_modules: 00 + 01 + 07 + 08
+  routing_note: Run literature/collision workflow; use source-quality and collision-evidence gates; do not load AI profile for ordinary finance/accounting
+    research.
+- task_class: METHOD_OR_DESIGN
+  trigger_examples: research design; identification; measurement design; pilot/screen/formal design; model/estimator choice
+  required_modules: 00 + 01 + 02 + 07 + 08 (+06 only if specialized)
+  routing_note: Classify the empirical execution class and run method precedent/identification requirements before outcome-bearing execution.
+- task_class: DATA_PROCESSING
+  trigger_examples: raw data; data QA; cleaning; merging; variable construction; missing data; outliers; panel build
+  required_modules: 00 + 02 + 07 + 08 (+04 when new access is needed)
+  routing_note: Use assistant-first execution where host capabilities permit; preserve raw identity and blind-data boundaries.
+- task_class: OUTCOME_SCREEN
+  trigger_examples: optional effect-open outcome decision screen; resource-allocation screen; screen failure diagnosis
+  required_modules: 00 + 01 + 02 + 07 + 08
+  routing_note: OUTCOME_DECISION_SCREEN is resource-allocation only. Freeze screen rules and reuse policy before effect open. Formal SESOI/equivalence/economic-null
+    adjudication belongs to FORMAL_STUDY.
+- task_class: FORMAL_STUDY
+  trigger_examples: formal main estimation; run frozen primary specification; formal economic-threshold adjudication
+  required_modules: 00 + 01 + 02 + 07 + 08 (+04/05/06 only if actually triggered)
+  routing_note: Requires Freeze B formal main specification and formal identification. Run frozen estimation/result QA before mechanism, robustness,
+    or writing claims.
+- task_class: ACCESS_DATA
+  trigger_examples: data access; WRDS; Bloomberg; LSEG; paid/private research databases; API/bulk entitlement
+  required_modules: 00 + 04 + 07 + 08 (+02 if processing follows)
+  routing_note: Platform existence is not entitlement or scalable research access. Search lawful construct-preserving alternatives before declaring
+    access blocked.
+- task_class: AI_FINANCE_RESEARCH
+  trigger_examples: research on AI/LLMs/agents/automation in finance, accounting, insurance or related business domains
+  required_modules: 00 + 01 + 03 + 04 + 05 + 07 + 08 (+02/06 if task requires)
+  routing_note: Load AI × Finance only as an explicit specialization profile. It must not redefine ordinary finance/accounting research.
+- task_class: SPECIAL_EXPERIMENT
+  trigger_examples: human-subject experiment; expert labeling; task benchmark/evaluation; marginal workflow value; cost-quality design
+  required_modules: 00 + 01 + 06 + 07 + 08 (+02 if empirical)
+  routing_note: Load specialized gates only when the design actually uses them.
+- task_class: WRITING_CLAIM_DISCIPLINE
+  trigger_examples: write research results from frozen evidence; claim ceiling; evidence-to-claim mapping
+  required_modules: 00 + 01 + 07 + 08 + relevant frozen project artifacts
+  routing_note: Use frozen evidence and claim ceiling. This is research-writing governance, not general prose polishing.
+- task_class: TASK_CLOSURE_VALIDATION
+  trigger_examples: automatic before claiming a task complete/PASS or handing off a formal result
+  required_modules: 00 + 07 + 08 + modules used by the current task
+  routing_note: Use LIGHT closure for ordinary tasks and MILESTONE validation for formal freezes/results/releases. Do not confuse a defined contract
+    with observed host execution.
+gates:
+- gate_id: GATE-CONSTRUCT-IDENTITY
+  gate: Construct/claim identity
+  activation_class: ALWAYS_ON
+  trigger: all research tasks
+  execution: name the construct and the measured object once per new design or claim, per CORE-Q02 and EMP-DATA02; silent thereafter unless they
+    diverge
+- gate_id: GATE-STATE-NOSKIP
+  gate: Current state/no-skip
+  activation_class: ALWAYS_ON
+  trigger: all research tasks
+  execution: one-line entry anchor per EMP-ENTRY01 before any estimation output; silent thereafter unless a state is skipped or unevidenced
+- gate_id: GATE-SEEN-BLINDNESS
+  gate: Seen Data/blindness
+  activation_class: ALWAYS_ON
+  trigger: empirical/confirmatory tasks
+  execution: state SEEN_DATA_STATUS before any effect is opened and write the exposure into the register, per GOV-SEEN01 and EMP-BLIND03; silent
+    thereafter
+- gate_id: GATE-CLAIM-DRIFT
+  gate: Claim drift
+  activation_class: ALWAYS_ON
+  trigger: all staged projects
+  execution: on any return to an earlier stage or change of claim, record reason, evidence and supersedes, per GOV-DRIFT01 and GOV-STATE02; silent
+    when the claim is unchanged
+- gate_id: GATE-SOURCE-QUALITY
+  gate: Source quality
+  activation_class: ALWAYS_ON
+  trigger: literature/evidence claims
+  execution: name the source tier and authority for each evidence claim, per CORE-LIT06; silent when the claim rests on an already-registered
+    source
+- gate_id: GATE-ASSISTANT-FIRST
+  gate: Assistant-first execution
+  activation_class: ALWAYS_ON
+  trigger: data/code tasks
+  execution: when host capabilities and permissions permit, run the data/code step directly and report what was executed; escalate only the genuinely
+    blocked acquisition/permission step
+- gate_id: GATE-VERSION-RESOLUTION
+  gate: Version resolution
+  activation_class: ALWAYS_ON
+  trigger: multiple ScholarOps copies or ambiguous release identity
+  execution: resolve CANONICAL_VERSION_STATUS from explicit release identity and verified fixity when applicable; automatic and silent when a
+    single trusted copy is loaded
+- gate_id: GATE-MISSING-DATA
+  gate: Missing full audit
+  activation_class: TRIGGERED
+  trigger: cheap triage finds material missing/selection
+  execution: full only if triggered
+- gate_id: GATE-WITHIN-STUDY-MULTIPLICITY
+  gate: Within-study multiplicity
+  activation_class: TRIGGERED
+  trigger: more than one confirmatory test supports same claim
+  execution: auto N/A otherwise
+- gate_id: GATE-ECONOMIC-THRESHOLD
+  gate: Economic threshold
+  activation_class: TRIGGERED
+  trigger: FORMAL_STUDY only, when an economic-effect decision requires SESOI/MDE
+  execution: NOT_APPLICABLE for technical probe, measurement validation and outcome decision screen; full gate only when triggered
+- gate_id: GATE-SPECIFICATION-SEARCH
+  gate: Specification search / data snooping
+  activation_class: TRIGGERED
+  trigger: the same dataset is used repeatedly to choose window, model, rule or sample
+  execution: lock the specification before formal estimation, or use a reality-check style procedure or holdout; otherwise SPECIFICATION_SEARCH_STATUS=BLOCKED;
+    untriggered→NOT_APPLICABLE
+- gate_id: GATE-LITERATURE-SELECTION-HURDLE
+  gate: Literature selection / factor-zoo hurdle
+  activation_class: TRIGGERED
+  trigger: the research question itself was selected from a heavily searched research universe
+  execution: raise the evidence hurdle, require independent validation or lower the claim ceiling; owned by 01_CORE at L4, not by the empirical
+    multiplicity gate; untriggered→NOT_APPLICABLE
+- gate_id: GATE-SCREEN-REUSE-POLICY
+  gate: Screen data reuse policy
+  activation_class: TRIGGERED
+  trigger: OUTCOME_SCREEN_APPLICABILITY=APPLICABLE
+  execution: freeze SCREEN_DATA_REUSE_POLICY before any effect is opened; default EXTERNAL_HOLDOUT; untriggered→NOT_APPLICABLE
+- gate_id: GATE-TERMINATION-ARCHIVE
+  gate: Terminated branch archive
+  activation_class: TRIGGERED
+  trigger: any formal STOP or STOP_RESOURCE_ALLOCATION verdict
+  execution: complete S24 termination record before the branch is closed; untriggered→NOT_APPLICABLE
+- gate_id: GATE-INFLUENCE-AUDIT
+  gate: Influence audit
+  activation_class: TRIGGERED
+  trigger: outcome regression with plausible influential-point risk
+  execution: pre-spec then B3
+- gate_id: GATE-FEW-CLUSTER
+  gate: Few cluster/event methods
+  activation_class: TRIGGERED
+  trigger: small independent shock/cluster count
+  execution: CORE-M01
+- gate_id: GATE-SPECIALIZED-DESIGN
+  gate: Specialized human/agent/cost gates
+  activation_class: TRIGGERED
+  trigger: design actually uses them
+  execution: load module 06 only
+- gate_id: GATE-RELEASE-PACKAGING
+  gate: Full release packaging
+  activation_class: MILESTONE_ONLY
+  trigger: formal project freeze/handoff/archive or distributable project artifact
+  execution: assemble the project-specific required artifact package; do not assume repository-maintenance tooling exists in the installed Skill
+- gate_id: GATE-POST-CLEAN-QA
+  gate: Full post-clean QA
+  activation_class: STALE_OR_CHANGED_ONLY
+  trigger: data/sample/transform/aggregation changed
+  execution: identity check only if no change
+- gate_id: GATE-PRE-FORMAL-L4-RECHECK
+  gate: Pre-formal L4 freshness/collision recheck
+  activation_class: STALE_OR_CHANGED_ONLY
+  trigger: stale review, fast-moving field, method/measurement change, or sentinel hit before formal study
+  execution: freshness sentinel by default; full update only when triggered
+- gate_id: GATE-SYSTEM-IDENTITY
+  gate: System identity
+  activation_class: TRIGGERED
+  trigger: live/dynamic AI system, model/version/tool identity, or other system identity is material to construct
+  execution: PASS/NOT_APPLICABLE before outcome-bearing execution
+- gate_id: GATE-CLOSURE-LIGHT
+  gate: Task closure light check
+  activation_class: ALWAYS_ON
+  trigger: before claiming task complete/PASS/next-step legality or delivering a result
+  execution: run internal LIGHT closure before claiming complete, PASS or next-step legality, per GOV-CLOSURE01; no extra artifact by default
+- gate_id: GATE-CLOSURE-MILESTONE
+  gate: Task closure deep validation
+  activation_class: MILESTONE_ONLY
+  trigger: freeze/formal handoff/pilot result/formal result/formal dataset/code release/canonical handoff/Skill release
+  execution: MILESTONE closure with task-specific executable validation
+invariants:
+- invariant_id: INV01
+  invariant: Pre-L4 claim freeze is distinct from empirical Freeze A/B
+  required_semantics: PRE_L4_CLAIM_FREEZE_STATUS separate; FREEZE_LAYER only A/B
+- invariant_id: INV02
+  invariant: Only OUTCOME_DECISION_SCREEN uses SCREEN_STATUS/SCREEN_VERDICT
+  required_semantics: technical probe, measurement validation and formal study must not route through S15; a branch with OUTCOME_SCREEN_APPLICABILITY=NOT_APPLICABLE
+    never acquires a screen verdict
+- invariant_id: INV03
+  invariant: Pre-outcome measurement validation precedes Death Pilot
+  required_semantics: S12 PASS before S13/S15
+- invariant_id: INV04
+  invariant: Formal main estimation/result QA precedes mechanism, robustness and writing
+  required_semantics: S19→S20→S21→S22
+- invariant_id: INV05
+  invariant: Risk-adaptive N/A never requires empty artifact
+  required_semantics: NOT_APPLICABLE means no empty ledger/template
+- invariant_id: INV06
+  invariant: Post-Pilot literature update is not result-driven redesign
+  required_semantics: effect sign/p-value/subgroup cannot drive collision search
+- invariant_id: INV07
+  invariant: Technical/data bugs use logs/tests/vendor docs before academic method literature
+  required_semantics: method literature escalates only for method-level uncertainty
+- invariant_id: INV08
+  invariant: RE alone recovers canonical project state and stops
+  required_semantics: No automatic research-state advance; structured state and registered artifacts first, archived conversation evidence only
+    as needed.
+- invariant_id: INV09
+  invariant: AU alone audits and stops at the earliest material gap
+  required_semantics: No automatic research-state advance; distinguish research-state defects from presentation issues.
+- invariant_id: INV10
+  invariant: Canonical project-state module contains no concrete project/candidate IDs
+  required_semantics: project values live in project artifacts
+- invariant_id: INV11
+  invariant: Pre-L4 craft is diagnostic/optional, not an entry gate
+  required_semantics: argument architecture/one-paragraph test cannot block L4 by itself
+- invariant_id: INV12
+  invariant: Stable release requires validator PASS after final canonical edits
+  required_semantics: no ZIP publication on failed lint
+- invariant_id: INV-CLOSURE-01
+  invariant: No completion claim without closure PASS
+  required_semantics: Any claim of COMPLETE/PASS/next-step legality requires TASK_CLOSURE_STATUS=PASS.
+- invariant_id: INV-CLOSURE-02
+  invariant: Last result-affecting change invalidates prior validation
+  required_semantics: After any result/state-affecting edit, the final version must be revalidated before delivery.
+- invariant_id: INV-CLOSURE-03
+  invariant: Closure depth remains risk-adaptive
+  required_semantics: Ordinary tasks use LIGHT; MILESTONE validation is reserved for high-risk formal handoffs/results/releases.
+- invariant_id: INV-CLOSURE-04
+  invariant: Self-repair cannot hide blockers
+  required_semantics: Assistant-fixable defects are repaired before delivery; user-only dependencies remain BLOCKED and explicit.
+- invariant_id: INV13
+  invariant: Canonical fingerprint is recomputed, never trusted as declared
+  required_semantics: The validator recomputes CANONICAL_FINGERPRINT from the declared scope and fails on mismatch; a declared-but-unverifiable
+    fingerprint is not acceptable evidence.
+- invariant_id: INV14
+  invariant: Generated runtime is verified independently of the builder
+  required_semantics: The validator re-derives generated content from the spec with its own parser; a tampered or stubbed builder cannot make
+    a divergent generated file pass.
+- invariant_id: INV15
+  invariant: A package may not certify itself
+  required_semantics: RELEASE_METADATA.json carries identity only; validation, mutation, semantic-audit and closure verdicts live in release_evidence/
+    and in the detached attestation outside the ZIP.
+- invariant_id: INV16
+  invariant: Generated runtime is byte-identical across platforms
+  required_semantics: Generated files are written LF-only so that a rebuild on Windows does not invalidate manifest, checksums or fingerprint.
+- invariant_id: INV17
+  invariant: Documented validator capability equals implemented validator capability
+  required_semantics: Every check advertised in Index 8A maps to a named check emitted by tools/validate_skill.py.
+- invariant_id: INV18
+  invariant: Status values carry uniform, documented semantics
+  required_semantics: PASS/CONDITIONAL/BLOCKED/NOT_APPLICABLE mean the same thing across every status field; CONDITIONAL never satisfies a downstream
+    gate that requires PASS and must carry a CONDITION_TYPE.
+- invariant_id: INV19
+  invariant: One milestone vocabulary
+  required_semantics: Closure depth, deliverable packaging and hash policy all reference the single registered MILESTONE_CLASS enum; no module
+    maintains a parallel milestone list.
+- invariant_id: INV20
+  invariant: Freeze A checklist is derived from the state machine, not hand-maintained
+  required_semantics: Module 02 section 12 must cover every field named in S13 entry and pass_condition; a second hand-written gate definition
+    is a drift source.
+- invariant_id: INV21
+  invariant: Every canonical rule is addressable and every gate reference resolves
+  required_semantics: Each rule-level heading in modules 01-07 carries a module-prefixed rule ID, and every GATE- token used in prose resolves
+    to a registered gate_id.
+- invariant_id: INV23
+  invariant: A screen never establishes an economic null
+  required_semantics: OUTCOME_DECISION_SCREEN adjudicates resource allocation only; STOP_RESOURCE_ALLOCATION means the project is not worth further
+    investment under the pre-frozen screening rule, never that the effect has been shown to be economically absent. Equivalence and minimum-effect
+    conclusions belong to FORMAL_STUDY.
+- invariant_id: INV24
+  invariant: Screen data reuse is frozen before the effect is opened
+  required_semantics: SCREEN_DATA_REUSE_POLICY is recorded at S13, before B3. Default EXTERNAL_HOLDOUT. Reuse after the effect has been opened
+    requires either a blinded nuisance-only argument, a valid adaptive or sequential procedure, or demotion of the formal result to exploratory.
+- invariant_id: INV25
+  invariant: The outcome screen is optional
+  required_semantics: When a holdout would destroy formal power, OUTCOME_SCREEN_APPLICABILITY=NOT_APPLICABLE and the branch proceeds from S13
+    to S17 without opening any effect.
+- invariant_id: INV26
+  invariant: Multiplicity is governed in three separate layers
+  required_semantics: Within-study multiplicity, specification search on one dataset, and literature-level selection are distinct problems with
+    distinct remedies; a within-study correction never discharges the other two.
+- invariant_id: INV27
+  invariant: Every terminated branch has a terminal state
+  required_semantics: All formal STOP and STOP_RESOURCE_ALLOCATION paths route to S24, which records termination reason, failure class, reusable
+    assets, cooldown/reopen conditions, and Seen Data status. No transition targets a bare terminal word without an archive record.
+- invariant_id: INV28
+  invariant: Blinding is a principle, not an event-study template
+  required_semantics: The firewall hides the current study's answer while analysis choices remain discretionary; each design maps it via BLINDING_IMPLEMENTATION_MODE.
+    Background familiarity with a standard dataset is not an unblinding event.
+- invariant_id: INV29
+  invariant: External method precedent carries an explicit transfer status
+  required_semantics: Every canonical rule resting on outside methodological authority appears in the method source locator registry with a locator
+    and a PRECEDENT_TRANSFER_STATUS, including what the source does not support.
+- invariant_id: INV30
+  invariant: Previously created or acquired project assets are resolved before re-upload is requested
+  required_semantics: When a task depends on a prior artifact not directly attached, search the current workspace and registered project assets,
+    verify candidate identity/version, and request user re-upload only after no usable copy is found or host access is blocked.
+- invariant_id: INV31
+  invariant: A recorded verification is reusable until an invalidation trigger fires
+  required_semantics: Re-verification of a prior asset is triggered by change, not by the arrival of a new task. The data asset schema carries
+    verified_at, verified_hash, verification_scope and verification_result so the result has somewhere to live, and PRIOR_ASSET_RESOLUTION routes
+    through the reuse rule instead of re-checking unconditionally.
+- invariant_id: INV32
+  invariant: Estimation output requires a resolved empirical entry
+  required_semantics: No coefficient, test statistic, portfolio return or model performance number is produced before the current pipeline state
+    is anchored and the upstream data states are evidenced. GATE-STATE-NOSKIP carries an executable entry procedure rather than a silent posture,
+    and the absence of a user request is never a reason to skip a state.
+- invariant_id: INV33
+  invariant: Every rule leaning on outside authority is registered or points at the registry
+  required_semantics: A module rule that cites an external author, guideline or standard either has its own row in the method source locator registry
+    or explicitly references that registry. The registry check runs in both directions, so a source cannot be used as authority in prose while
+    being absent from the registry.
+- invariant_id: INV34
+  invariant: An always-on gate names an executable procedure, not a silence posture
+  required_semantics: Every gate with activation_class ALWAYS_ON states what it actually does and names at least one rule that carries the procedure.
+    A gate whose execution is only a declaration of silence has no way to detect the condition it guards and is indistinguishable at runtime from
+    an absent gate.
+- invariant_id: INV35
+  invariant: Adverse evidence is held to the tier that would be needed to establish the claim
+  required_semantics: A contribution may not be stopped or narrowed by a source weaker than one that could have established the same proposition.
+    The tier of the adverse source is recorded, and a source below the supporting tier can at most defer the verdict, never close it. Absence
+    of a search hit is search-process evidence and never establishes novelty or collision.
+- invariant_id: INV36
+  invariant: An irreversible action stays done after a later failure
+  required_semantics: Warnings, recoverable failures and irreversible external state changes are distinguished. Once a result has been opened,
+    an external job submitted, funds committed or a message sent, a subsequent error does not undo it and may not be reported as if the action
+    had not occurred.
+- invariant_id: INV37
+  invariant: Every rule is locatable without reading its whole module
+  required_semantics: A generated locator index maps every rule id to its module and section, and the loader routes through it. Locating one rule
+    must not require loading a 25k-token module, because in a chat session every module read is spent permanently from the same context the work
+    itself needs.
+- invariant_id: INV22
+  invariant: Cross-module concepts have exactly one canonical definition
+  required_semantics: Evidence hierarchy, Seen Data schema and the empirical execution taxonomy are each stated once; other modules reference
+    rather than restate them.
+method_sources:
+- rule_id: EMP-SCREEN01
+  source: Eldridge et al., CONSORT 2010 extension to randomised pilot and feasibility trials
+  source_type: REPORTING_GUIDELINE
+  edition_year: '2016'
+  chapter_section: Box 1; Scope of this paper
+  page_or_article_locator: BMJ 355:i5239
+  doi_or_stable_id: 10.1136/bmj.i5239
+  fulltext_verified: 'YES'
+  transfer_scope: feasibility and measurement objectives only
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: a pilot exists to assess feasibility; sample size must follow the stated objective
+  claim_not_supported: that a small effect-open sample may deliver an economic or efficacy kill; the extension explicitly does not recommend effectiveness
+    hypothesis testing and does not apply to internal pilots
+- rule_id: EMP-SCREEN02
+  source: Leon, Davis & Kraemer, The role and interpretation of pilot studies in clinical research
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '2011'
+  chapter_section: Misuses of pilot studies
+  page_or_article_locator: J Psychiatr Res 45(5):626-629
+  doi_or_stable_id: 10.1016/j.jpsychires.2010.10.008
+  fulltext_verified: 'YES'
+  transfer_scope: feasibility objectives
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: a pilot is not a hypothesis-testing study; small-sample effect estimates are too imprecise to drive continue/stop on effect
+    grounds
+  claim_not_supported: any confirmatory or economic null claim from pilot data
+- rule_id: EMP-REUSE01
+  source: Wittes & Brittain, The role of internal pilot studies in increasing the efficiency of clinical trials
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '1990'
+  chapter_section: 'Introduction and Purposes for Pilot Studies (pp.65-68); Example: An Internal Pilot for Estimating Variance (pp.68-69); Discussion
+    (p.70)'
+  page_or_article_locator: pp.65-70; the treatment-parameter exclusion is on p.67
+  doi_or_stable_id: 10.1002/sim.4780090113
+  fulltext_verified: 'YES'
+  transfer_scope: Supports distinction between nuisance/design-parameter adaptation and treatment-effect-driven adaptation, and inferential consequences
+    of some internal-pilot reuse.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports distinction between nuisance/design-parameter adaptation and treatment-effect-driven adaptation, and inferential consequences
+    of some internal-pilot reuse.
+  claim_not_supported: ScholarOps four-way reuse policy enum is its own governance implementation; clinical-trial methods are not universal finance
+    procedures.
+- rule_id: EMP-REUSE02
+  source: Wittes, Schabenberger, Zucker, Brittain & Proschan, Internal pilot studies I - type I error rate of the naive t-test
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '1999'
+  chapter_section: Abstract and section 4 Why Is the Alpha-Level Biased? (pp.3481-3484); section 6.2 Type I Error Rate with Table I (pp.3485-3487);
+    section 7 Discussion and Recommendations (pp.3489-3490)
+  page_or_article_locator: pp.3481-3491; Table I at p.3487; recommendations at pp.3489-3490
+  doi_or_stable_id: 10.1002/(SICI)1097-0258(19991230)18:24<3481::AID-SIM301>3.0.CO;2-C
+  fulltext_verified: 'YES'
+  transfer_scope: Supports design-specific alpha inflation, restricted/unrestricted differences, >~30/group example range, .052 bound in studied
+    range, 1.99 vs 1.96 restricted-normal recommendation, and practical pilot fraction .25–.75.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports design-specific alpha inflation, restricted/unrestricted differences, >~30/group example range, .052 bound in studied
+    range, 1.99 vs 1.96 restricted-normal recommendation, and practical pilot fraction .25–.75.
+  claim_not_supported: These numerical values are not universal constants and do not justify effect-based branch selection.
+- rule_id: EMP-BLIND01
+  source: Klein & Roodman, Blind analysis in nuclear and particle physics
+  source_type: PEER_REVIEWED_REVIEW
+  edition_year: '2005'
+  chapter_section: Abstract and section 1 Introduction (p.141); section 2 Experimenter's Bias and the Motivations for Blind Analyses (p.145);
+    section 3 Blind Analysis Methods (p.149), with 3.1 Hidden Signal Boxes (p.149), 3.2 Hidden Answer Methods (p.152), 3.3 Adding or Removing
+    Events (p.156), 3.4 Data Prescaling (p.159); section 4 Conclusion (p.162)
+  page_or_article_locator: pp.141-163; method families at pp.149-162; unblinding caveat at p.149
+  doi_or_stable_id: 10.1146/annurev.nucl.55.090704.151521
+  fulltext_verified: 'YES'
+  transfer_scope: design-neutral blinding principle and its implementation families
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: 'the abstract on p.141 defines a blind analysis as preventing experimenters from knowing the answer until the analysis is complete,
+    in order to stop them biasing the result toward their own preconceptions. Section 3 then shows the principle is implemented through several
+    distinct families rather than one mechanism: hiding the signal region, hiding the answer, adding or removing events, and prescaling the data.
+    That plurality is the precedent for the skill carrying BLINDING_IMPLEMENTATION_MODE as an enum instead of prescribing one scheme'
+  claim_not_supported: that blinding certifies a result. p.149 says the method does not require analysis to stop after unblinding, nor does it
+    ensure the results are correct, and that if further selections are applied after unblinding the publication should be explicit about which
+    ones. Blinding constrains discretion; it does not replace disclosure, and it is not evidence of correctness
+- rule_id: EMP-BLIND02A
+  source: Polit, Blinding during the analysis of research data
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '2011'
+  chapter_section: analysis decisions susceptible to treatment-code knowledge
+  page_or_article_locator: Int J Nurs Stud 48(5):636-641
+  doi_or_stable_id: 10.1016/j.ijnurstu.2011.02.010
+  fulltext_verified: 'YES'
+  transfer_scope: Supports blinding analysts from treatment-code identity when discretionary analytic choices can affect results; explicitly lists
+    missingness, outliers/distribution, transforms, recoding/cutpoints, subgroups, covariates, endpoints, sensitivity/validity choices.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports blinding analysts from treatment-code identity when discretionary analytic choices can affect results; explicitly
+    lists missingness, outliers/distribution, transforms, recoding/cutpoints, subgroups, covariates, endpoints, sensitivity/validity choices.
+  claim_not_supported: Does not directly study finance/business observational designs; transfer must be labeled as adaptation.
+- rule_id: EMP-MULT01
+  source: List, Shaikh & Xu, Multiple hypothesis testing in experimental economics
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '2019'
+  chapter_section: Abstract (p.773); section 1 Introduction (pp.774-775); section 2 Setup and Notation with Assumptions 2.1-2.3 and Remarks 2.1-2.2
+    (pp.775-777); section 3 A Stepwise Multiple Testing Procedure, Algorithm 3.1, Theorem 3.1 and Remarks 3.1-3.8 (pp.777-781); section 4 Empirical
+    Applications, Tables 1-5 (pp.781-788); section 5 Conclusion (pp.785-789)
+  page_or_article_locator: Exp Econ 22(4):773-793; familywise arithmetic and prevalence at p.774; assignment and support assumptions at p.777;
+    dominance over Bonferroni and Holm at p.779; adjusted p-value and logical restrictions at p.780; applied magnitudes in Tables 1-3 pp.782-784
+    and the combined family at p.785; data requirement at p.789
+  doi_or_stable_id: 10.1007/s10683-018-09597-5
+  fulltext_verified: 'YES'
+  transfer_scope: within-study multiplicity across outcomes, discrete subgroups and treatments, in an experiment where treatment status is assigned
+    by simple random sampling
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: 'pp.773-774 name exactly three sources of multiplicity: multiple outcomes, subgroups defined by observed characteristics, and
+    multiple treatments. p.774 supplies the arithmetic that makes the gate default-on rather than discretionary: with independent tests at the
+    five per cent level the probability of at least one false rejection is 0.226 at five hypotheses, 0.401 at ten and 0.994 at a hundred, and
+    the same page reports that 84 per cent of the surveyed experiments examine five or more outcomes and 61 per cent ten or more. Remark 3.2 at
+    p.779 is the decisive operational statement: Bonferroni and Holm are the same stepwise algorithm run with a fixed critical value that assumes
+    a least favourable dependence structure, and the resampling procedure will always reject at least as many null hypotheses as they do. p.780
+    defines the adjusted p-value as the smallest level at which the hypothesis is rejected and recommends studentising. The applied section shows
+    adjustment changing conclusions rather than decorating them: dollars given not including the match falls from significant at five per cent
+    to significant only at ten (Table 1, p.782); two of four subgroups fall to one (Table 2, p.783); the 2:1 match moves from 0.0477 to 0.1297
+    and stops being significant at any conventional level (p.783, Table 3 p.784); and across the combined family of 48 hypotheses the rejections
+    at ten per cent fall from 21 to 9, with 7 of the 9 attached to a single outcome (p.785). p.785 states the reporting standard the skill adopts,
+    that multiplicity-adjusted results be reported alongside the conventional unadjusted ones'
+  claim_not_supported: anything about selection of the research question across the literature, and anything about repeated specification search
+    on one dataset; those are separate layers. Inside its own layer the scope is narrower than it looks. Remark 2.1 at p.777 assumes treatment
+    status is i.i.d., so the procedure does not accommodate covariate-adaptive or stratified assignment designed to balance baseline covariates,
+    and a design of that kind must be resolved before this source is cited. Assumption 2.3 at p.777 requires treatment and the subgroup variable
+    to be discrete with finite support, so continuous moderators fall outside it. Remark 2.2 at p.777 concedes that with a very large family,
+    familywise control materially limits the ability to detect genuinely false nulls, and points to generalised error rates instead. Remark 3.7
+    at p.780 confines the logical-restriction improvement to more than two treatments and warns that it becomes computationally prohibitive beyond
+    a few; Table 4 at p.784 shows it moving p-values without producing any extra rejection. p.789 notes the procedure needs the underlying data,
+    so where only published unadjusted p-values exist, Bonferroni or Holm is the applicable tool. None of this converts an exploratory rejection
+    into a confirmatory one
+- rule_id: EMP-SPECSEARCH01
+  source: White, A reality check for data snooping
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '2000'
+  chapter_section: section 1 Introduction (pp.1097-1099); section 2.a The Basic Framework (pp.1099-1101); section 2.b Basic Theory, Propositions
+    2.1-2.2 (pp.1101-1103); Monte Carlo and Bootstrap Reality Checks (pp.1103-1105); section 2.c Extensions and Variations (pp.1106-1108); section
+    3 Implementing the Bootstrap Reality Check (pp.1108-1111); section 4 An Illustrative Example, Tables I and II (pp.1111-1115); section 5 Summary
+    (pp.1115-1117)
+  page_or_article_locator: Econometrica 68(5):1097-1126; tested null at p.1101; Reality Check defined at p.1102; enumerability limit at p.1103;
+    implementation settings at p.1109; naive-versus-Reality-Check comparison at pp.1113-1115 with Table I p.1113 and Table II p.1115
+  doi_or_stable_id: 10.1111/1468-0262.00152
+  fulltext_verified: 'YES'
+  transfer_scope: Supports Reality Check null against a named benchmark across an enumerable searched model set, bootstrap implementation, examples,
+    and stated limitations.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports Reality Check null against a named benchmark across an enumerable searched model set, bootstrap implementation, examples,
+    and stated limitations.
+  claim_not_supported: Does not automatically account for unobserved prior searches; cross-validation extension is not established; example bootstrap
+    parameters are not universal.
+- rule_id: CORE-L4-09
+  source: Harvey, Liu & Zhu, ... and the cross-section of expected returns
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '2016'
+  chapter_section: Abstract and Introduction (p.5); section 3 Adjusted t-statistics in Multiple Testing; section 3.6 benchmark t-statistics; section
+    3.7 Robustness including 3.7.1 test statistics dependence; section 4 Correlation among Test Statistics; Appendix A Multiple Testing When the
+    Number of Tests Is Unknown
+  page_or_article_locator: Rev Financ Stud 29(1):5-68; headline hurdle in the abstract, p.5
+  doi_or_stable_id: 10.1093/rfs/hhv059
+  fulltext_verified: 'YES'
+  transfer_scope: Supports finance factor-zoo/multiple-testing benchmark thresholds and caveats in the studied factor universes.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: In heavily searched cross-sectional return-factor universes, conventional single-test thresholds can be too lenient. The published
+    paper reports a headline t-statistic hurdle above 3.0 and more stringent multiple-testing benchmarks, including 3.54 for the homogeneous post-2000
+    Bonferroni subset discussed in the paper.
+  claim_not_supported: No universal t-statistic cutoff for every finance/accounting/business design; the paper does not validate the current study’s
+    measurement, clustering, or identification.
+- rule_id: EMP-DATA09
+  source: Little & Rubin, Statistical Analysis with Missing Data, 3rd ed.
+  source_type: TEXTBOOK
+  edition_year: '2020'
+  chapter_section: 3rd ed. (current); §1.3 Mechanisms That Lead to Missing Data (p.13); ch.3 Complete-Case and Available-Case Analysis Including
+    Weighting Methods (§3.1 p.47, §3.2 Complete-Case Analysis p.47, §3.3 Weighted Complete-Case Analysis p.50, §3.4 Available-Case Analysis p.61);
+    ch.4 Single Imputation Methods (§4.2 imputing means p.69, §4.3 imputing draws p.73); ch.5 Accounting for Uncertainty from Missing Data (§5.1
+    p.85, §5.2 valid SEs from a single filled-in set p.86, §5.3 resampling p.90, §5.4 multiple imputation p.95). Chapter 5 was retitled from the
+    2nd edition
+  page_or_article_locator: pp.13, 47-61, 69-73, 85-100; complete-case bias examples 3.2 at p.48 and 3.3-3.4 at p.49; the four uncertainty strategies
+    at pp.85-86
+  doi_or_stable_id: 10.1002/9781119482260; ISBN 9780470526798
+  fulltext_verified: 'YES'
+  transfer_scope: Supports mechanism×estimand dependence of complete-case validity and broad missing-data uncertainty principles.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports mechanism×estimand dependence of complete-case validity and broad missing-data uncertainty principles.
+  claim_not_supported: Does not prescribe ScholarOps field names, finance-specific timing rules, or a universal imputation method.
+- rule_id: EMP-DATA09F
+  source: Bryzgalova, Lerner, Lettau & Pelger, Missing financial data
+  source_type: PEER_REVIEWED_APPLICATION
+  edition_year: '2025'
+  chapter_section: missingness patterns in firm characteristics; downstream effects
+  page_or_article_locator: Rev Financ Stud 38(3):803-882
+  doi_or_stable_id: 10.1093/rfs/hhae036
+  fulltext_verified: 'YES'
+  transfer_scope: finance firm-characteristic panels; risk premia, anomalies, portfolio construction
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: firm-characteristic missingness is widespread and systematic; naive complete-case or median imputation distorts asset-pricing
+    quantities
+  claim_not_supported: that the same distortion metrics define downstream validation for a causal treatment-effect estimand
+- rule_id: EMP-DATA06
+  source: Leone, Minutti-Meza & Wasley, Influential observations and inference in accounting research
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '2019'
+  chapter_section: simulation evidence on winsorization, truncation and robust regression
+  page_or_article_locator: Account Rev 94(6):337-364
+  doi_or_stable_id: 10.2308/accr-52396
+  fulltext_verified: 'YES'
+  transfer_scope: influential-observation diagnosis in linear models
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: winsorization and truncation are not substitutes for influential-observation analysis; residual and weight based diagnostics
+    address a different question
+  claim_not_supported: that robust regression is universally correct
+- rule_id: EMP-PANEL02
+  source: Wooldridge, Econometric Analysis of Cross Section and Panel Data
+  source_type: TEXTBOOK
+  edition_year: '2010'
+  chapter_section: 2nd ed.; section 4.4 Properties of Ordinary Least Squares under Measurement Error (pp.76-82); section 19.9 Sample Selection
+    and Attrition in Linear Panel Data Models (p.827), with 19.9.1 Fixed and Random Effects Estimation with Unbalanced Panels (p.828), 19.9.2
+    Testing and Correcting for Sample Selection Bias (p.832), 19.9.3 Attrition (p.837); section 20.3 Cluster Sampling (p.863)
+  page_or_article_locator: pp.76-82, 827-845, 863
+  doi_or_stable_id: MIT Press ISBN 978-0-262-23258-6
+  fulltext_verified: 'YES'
+  transfer_scope: Supports distinction between raw observations and effective independent variation under clustering/high-frequency dependence
+    and short calendar span.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports distinction between raw observations and effective independent variation under clustering/high-frequency dependence
+    and short calendar span.
+  claim_not_supported: Does not imply a universal minimum cluster count.
+- rule_id: EMP-SAMPLE03
+  source: Campbell, Lo & MacKinlay, The Econometrics of Financial Markets
+  source_type: TEXTBOOK
+  edition_year: '1997'
+  chapter_section: 1st ed.; Ch.4 Event-Study Analysis (p.149); section 4.4.6 Inferences with Clustering (p.166); section 4.5 Modifying the Null
+    Hypothesis (p.167); section 4.6 Analysis of Power (p.168); section 4.9 Further Issues (p.174); section 4.9.1 Role of the Sampling Interval
+    (p.175); section 4.9.2 Inferences with Event-Date Uncertainty (p.177); section 4.9.3 Possible Biases (p.177)
+  page_or_article_locator: pp.149, 166-169, 174-177
+  doi_or_stable_id: Princeton University Press ISBN 978-0-691-04301-2
+  fulltext_verified: 'YES'
+  transfer_scope: Supports event-study power dependence on effect size, variance, N, sampling interval and event-date uncertainty.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports event-study power dependence on effect size, variance, N, sampling interval and event-date uncertainty.
+  claim_not_supported: Does not prescribe one universal event window/sample size; intraday application needs microstructure-specific handling.
+- rule_id: EMP-SAMPLE04
+  source: Hasbrouck, Empirical Market Microstructure
+  source_type: TEXTBOOK
+  edition_year: '2007'
+  chapter_section: 1st ed.; Ch.1 Introduction, section 1.4 Econometric Issues (p.6). Section 1.5 begins on p.7, so 1.4 sits entirely on p.6
+  page_or_article_locator: p.6
+  doi_or_stable_id: Oxford University Press ISBN 978-0-19-530164-9
+  fulltext_verified: 'YES'
+  transfer_scope: Supports reporting/considering independent event/cluster structure rather than raw rows.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports reporting/considering independent event/cluster structure rather than raw rows.
+  claim_not_supported: Does not provide a universal sample-size cutoff.
+- rule_id: EMP-THRESH02
+  source: Bali, Engle & Murray, Empirical Asset Pricing - The Cross Section of Stock Returns
+  source_type: TEXTBOOK
+  edition_year: '2016'
+  chapter_section: 1st ed.; Ch.6 Fama and MacBeth Regression Analysis, section 6.2 Interpreting FM Regressions (pp.95-98); magnitude discussion
+    opens on p.96. Supporting sections 2.1-2.2 Summary Statistics (pp.9-16) for the cross-sectional dispersion inputs, and Ch.5 Portfolio Analysis
+    section 5.1.5 (p.43) for the high-minus-low variant.
+  page_or_article_locator: p.96 (three interchangeable scales); pp.97-98 (worked examples)
+  doi_or_stable_id: Wiley ISBN 978-1-118-58947-1
+  fulltext_verified: 'YES'
+  transfer_scope: Supports translating regression coefficients into economically interpretable scales (SD, percentile/IQR, high-low portfolio
+    spreads).
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports translating regression coefficients into economically interpretable scales (SD, percentile/IQR, high-low portfolio
+    spreads).
+  claim_not_supported: Does not define a universal SESOI/economic minimum or support ScholarOps evidence-priority hierarchy by itself.
+- rule_id: EMP-DATA06
+  source: Bali, Engle & Murray, Empirical Asset Pricing - The Cross Section of Stock Returns
+  source_type: TEXTBOOK
+  edition_year: '2016'
+  chapter_section: 1st ed.; Ch.1 Preliminaries, section 1.2 Winsorization and Truncation (pp.5-6)
+  page_or_article_locator: p.5
+  doi_or_stable_id: Wiley ISBN 978-1-118-58947-1
+  fulltext_verified: 'YES'
+  transfer_scope: Supports that winsorization/truncation are common, comparatively ad hoc tail-handling conventions in empirical asset pricing.
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Supports that winsorization/truncation are common, comparatively ad hoc tail-handling conventions in empirical asset pricing.
+  claim_not_supported: Does not prove a universal cutoff and does not establish winsorization as an influence-diagnostic solution.
+- rule_id: EMP-MULT04
+  source: FDA, Multiple Endpoints in Clinical Trials - Guidance for Industry
+  source_type: REGULATORY_GUIDANCE
+  edition_year: '2022'
+  chapter_section: 'final guidance October 2022, superseding the 13 January 2017 draft; section II.C Multiplicity (pp.5-6); section III.A The
+    Hierarchy of Families of Endpoints (pp.6-8); section III.B Type II Error Rate and Sample Size (p.8); section IV Methodological Considerations
+    (p.13); Appendix: Statistical Methods (pp.18-26)'
+  page_or_article_locator: Docket FDA-2016-D-4460; grouping criterion and three-tier hierarchy at p.6; secondary and exploratory treatment at
+    p.7; co-primary power arithmetic at p.8; Hochberg assumption caveat at pp.19-20; resampling caveats at p.21; nonbinding status at p.2
+  doi_or_stable_id: https://www.fda.gov/media/162416/download
+  fulltext_verified: 'YES'
+  transfer_scope: ordering and grouping of endpoints before multiplicity adjustment, in a regulatory drug-efficacy setting
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: 'p.6 states the grouping criterion, and it is sharper than clinical importance alone: the critical determination is whether
+    an endpoint is intended to establish effectiveness or to demonstrate additional effects, with expected event frequency and anticipated effect
+    also considered. The hierarchy has exactly three tiers, primary, secondary and exploratory, and each may hold one endpoint or a family. p.7
+    gives two consequences the skill now carries: exploratory endpoints need no multiplicity adjustment because they are not used to support conclusions,
+    and secondary results are interpretable only after an effect on the primary family is shown, with the overall Type I error rate controlled
+    across primary and secondary families together. The same page warns against long secondary lists, since adjustment shrinks the chance any
+    secondary shows an effect and a hierarchy may mean lower ones are never reached. p.5 gives the arithmetic behind the gate, two independent
+    endpoints roughly doubling the error rate, three reaching about 7 per cent and ten about 22 per cent, and states the sequencing principle
+    that all endpoints, time points, populations and analyses are prespecified first and the adjustment chosen afterwards. p.8 quantifies the
+    co-primary trade-off: two independent endpoints each powered at 80 per cent give about 64 per cent joint power'
+  claim_not_supported: 'any alpha number, any approval standard, and any promotion of a secondary endpoint after a primary fails. The scope limits
+    are explicit. p.2 states that guidances are nonbinding and that should means suggested, not required. p.2 also confines the document to multiple
+    endpoints within a single trial and says other sources of multiplicity, including multiple doses, time points and subgroups, are not specifically
+    addressed, so this row cannot be cited for the skill''s subgroup or horizon entries. Safety analyses outside a prespecified testing set are
+    out of scope. The appendix constrains method choice rather than endorsing it: pp.19-20 record that the Hochberg procedure is not assumption-free
+    and can fail for some negatively correlated tests, and p.21 notes resampling rests on assumptions difficult to verify and usually needs large
+    samples'
+- rule_id: EMP-THRESH03
+  source: Lakens, Equivalence tests - a practical primer for t tests, correlations, and meta-analyses
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '2017'
+  chapter_section: introduction and Testing for Equivalence (pp.355-356); Equivalence Tests for Differences Between Two Independent Means (pp.356-358)
+    with Table 1 sample sizes (p.358); Setting Equivalence Bounds (pp.359-360); Discussion (pp.360-361)
+  page_or_article_locator: Soc Psychol Personal Sci 8(4):355-362; the four possible outcomes and Figure 1 at p.356; sample-size cost in Table
+    1 at p.358; the resource-determined bound and its worked numbers at p.359; operationalisation and competence limits at p.360
+  doi_or_stable_id: 10.1177/1948550617697177
+  fulltext_verified: 'YES'
+  transfer_scope: concluding the absence of a meaningful effect, given a pre-specified bound
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: 'p.355 draws the distinction the rule rests on: it is statistically impossible to support the hypothesis that a true effect
+    is exactly zero, but it is possible to reject effects large enough to be worthwhile, which is what the two one-sided tests procedure does
+    against bounds set from the smallest effect size of interest. The same page documents how common the error is, with the phrase no effect appearing
+    in 108 articles in one journal up to August 2016 almost always on the basis of nonsignificance, and Finch and colleagues reporting that around
+    38 per cent of articles with nonsignificant results in one applied journal accept the null. p.356 supplies the outcome table the skill now
+    uses: with both a significance test and an equivalence test there are four results, not two, since an effect can be equivalent and not different,
+    different and not equivalent, both different and equivalent, or undetermined, and the last of these is the honest verdict when the data settle
+    nothing. The same page notes the 90 per cent interval is the right one because two one-sided tests are run at 5 per cent each. p.359 gives
+    the bound-setting rule for the common case where theory fixes no boundary: set the bound to the smallest effect the available resources give
+    sufficient power to detect, so that the maximum sample size one is willing to collect implicitly determines the smallest effect size of interest;
+    with 100 per condition at 80 per cent power and alpha .05 that is about 0.414 for the equivalence test. p.358 prices the alternative, with
+    a bound of d = 0.1 needing 1,713 per group at 80 per cent power against 191 at d = 0.3. p.359 also requires that when equivalence is claimed
+    in an abstract, the bounds used be stated there too'
+  claim_not_supported: 'that equivalence means an effect is absent, or absent for anyone. p.359 is explicit that bounds set from a researcher''s
+    own resources do not license a conclusion that the effect is too small to matter to others, who may reasonably fund a larger study. p.360
+    adds three further limits the rule now carries: the conclusion holds for the specific operationalisation tested and a different manipulation
+    or measure may still show an effect; confounds can produce apparent equivalence; and whether the experiment was performed competently is a
+    non-statistical question that no equivalence test settles, which the paper describes as an inherent asymmetry between showing an effect and
+    showing the absence of a worthwhile one, resolvable only by independent replication. Nothing here supplies an economic minimum, which remains
+    the analyst''s burden under EMP-THRESH02'
+- rule_id: EMP-MULT03
+  source: Benjamini & Hochberg, Controlling the false discovery rate - a practical and powerful approach to multiple testing
+  source_type: PEER_REVIEWED_METHOD
+  edition_year: '1995'
+  chapter_section: Summary and Introduction (pp.289-290); section 2.1 Definition of False Discovery Rate (p.291); section 2.2 Examples (p.292);
+    section 3.1 The Procedure and Theorem 1 (p.293); section 3.2 worked example (pp.294-295); section 3.3 Theorem 2 (p.295); section 4 power comparisons
+    (pp.296-298); section 5 Conclusion (p.298)
+  page_or_article_locator: J R Stat Soc B 57(1):289-300; FDR definition and its two properties at p.291; the three example types including screening
+    at p.292; Theorem 1 and its independence condition at p.293; the mortality example at p.295; weak FWER control restated at p.298
+  doi_or_stable_id: 10.1111/j.2517-6161.1995.tb02031.x
+  fulltext_verified: 'YES'
+  transfer_scope: large exploratory families where the expected proportion of false rejections is the quantity of interest
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: 'p.291 defines the false discovery rate as the expected proportion of erroneous rejections among the rejected hypotheses and
+    establishes the two properties that place it in the skill''s hierarchy: when every null is true the FDR coincides with the familywise rate,
+    so controlling FDR gives familywise control only in the weak sense, and when some nulls are false the FDR is no larger than the familywise
+    rate, so any procedure controlling FWER already controls FDR while the converse buys power. p.290 states when the weaker criterion is appropriate,
+    namely when a treatment and a control are compared on several aspects of one effect and the overall conclusion need not be wrong even if some
+    individual nulls are falsely rejected. p.292 names the screening case directly, where many candidate effects are sifted and the concern is
+    that too large a fraction of false leads would burden a second, confirmatory phase, which is exactly the skill''s discovery family. p.293
+    gives the step-up procedure and Theorem 1. p.295 shows the stake concretely: among 15 comparisons Bonferroni and Hochberg each reject the
+    same three and none is mortality, while the FDR procedure at q* = .05 rejects four including mortality at p = .0095 against a threshold of
+    .013'
+  claim_not_supported: validity under dependence, and confirmatory use. Theorem 1 at p.293 is proved for independent test statistics; the remark
+    there relaxes independence only for the statistics attached to the false nulls, so a dependent family is outside what this paper establishes
+    and the analyst must justify the dependence structure separately under CORE-M01. The 1995 paper contains no dependence-robust variant. p.291
+    and p.298 also make clear that FDR control delivers familywise control only weakly, so a rejection surviving this procedure does not discharge
+    the strong familywise requirement a confirmatory claim carries and stays EXPLORATORY under this rule
+- rule_id: GOV-VERSION01
+  source: Semantic Versioning specification
+  source_type: TECHNICAL_STANDARD
+  edition_year: '2013'
+  chapter_section: Semantic Versioning 2.0.0, specification item 3
+  page_or_article_locator: semver.org, SemVer 2.0.0 spec item 3; increment rule in the summary and items 8-10
+  doi_or_stable_id: https://semver.org/spec/v2.0.0.html
+  fulltext_verified: 'YES'
+  transfer_scope: the immutability of an already-published version identifier
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: SemVer 2.0.0 item 3 states that once a versioned package has been released the contents of that version must not be modified,
+    and that any modification must be released as a new version. The spec repeats the point where it discusses correcting a broken release, saying
+    it is unacceptable to modify versioned releases even then. That single rule is the whole of the borrowing, and it is what GOV-VERSION01 enforces
+    mechanically through the fingerprint
+  claim_not_supported: this package's MAJOR/MINOR/PATCH boundary. SemVer item 1 requires the versioned thing to declare a public API, and its
+    increment rule is defined by backward compatibility of that API. This package has no public API and sets its version classes by whether new
+    required evidence is added, a local rule stated in Index section 8. SemVer supports nothing about fingerprints, fixity, manifests or provenance
+- rule_id: GOV-TRANSCRIPT01
+  source: W3C, PROV-DM - The PROV Data Model
+  source_type: TECHNICAL_STANDARD
+  edition_year: '2013'
+  chapter_section: W3C Recommendation 30 April 2013; section 1 Introduction; section 2.1 PROV Core Structures with 2.1.1 Entity and Activity,
+    2.1.2 Derivation, 2.1.3 Agents and Responsibility; sections 2.2.1.2 and 5.3.3 Association and Plan; section 1.1 Compliance
+  page_or_article_locator: W3C Recommendation REC-prov-dm-20130430; core triple at section 2.1; plan at sections 2.2.1.2 and 5.3.3; normative
+    scope at section 1.1
+  doi_or_stable_id: https://www.w3.org/TR/2013/REC-prov-dm-20130430/
+  fulltext_verified: 'YES'
+  transfer_scope: the vocabulary for recording what was produced, by what activity, by whom and when
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: 'section 1 defines provenance as a record of the people, institutions, entities and activities involved in producing, influencing
+    or delivering something, and section 2.1 fixes the three core types as entity, activity and agent, an agent being whatever bears responsibility.
+    That triple is why this skill records the artifact, the step that produced it and the owner rather than one free-text note. Section 5.3.3
+    supplies a second and more directly useful element: a plan is an entity representing the actions intended by an agent, and recording the plan
+    explicitly allows the execution to be validated against it. A frozen specification in this skill is exactly such a plan entity, which is the
+    precedent for checking a run against its freeze rather than against memory'
+  claim_not_supported: that this package implements PROV, and that section 2 is normative. Section 1.1 restricts the normative sections to 1.1,
+    1.3, 5 and Appendix A, so the overview introducing the core triple is itself informative and only the section 5 definitions bind. PROV-DM
+    specifies no serialisation; RDF, OWL and XML live in PROV-O and PROV-XML. Section 2.1.2 says PROV does not specify the conditions under which
+    a derivation holds, and validity constraints are deferred to PROV-CONSTRAINTS, so nothing here certifies that a provenance record is correct
+- rule_id: EMP-DATA09A
+  source: Little & Rubin, Statistical Analysis with Missing Data, 3rd ed.
+  source_type: TEXTBOOK
+  edition_year: '2020'
+  chapter_section: Chs.3–5
+  page_or_article_locator: Ch.3 §3.2; Chs.4–5
+  doi_or_stable_id: 10.1002/9781119482260; ISBN 9780470526798
+  fulltext_verified: 'YES'
+  transfer_scope: missingness mechanism and estimand justification for imputation/selection decisions
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Selection/imputation choices should be justified by the missingness mechanism and inferential target.
+  claim_not_supported: The exact ScholarOps freeze fields are an engineering adaptation, not a verbatim textbook procedure.
+- rule_id: EMP-DATA09B
+  source: Little & Rubin, Statistical Analysis with Missing Data, 3rd ed.
+  source_type: TEXTBOOK
+  edition_year: '2020'
+  chapter_section: Chs.3–5
+  page_or_article_locator: Chs.3–5, especially uncertainty treatment in Ch.5
+  doi_or_stable_id: 10.1002/9781119482260; ISBN 9780470526798
+  fulltext_verified: 'YES'
+  transfer_scope: validation of missing-data handling against the downstream estimand
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Missing-data methods must be evaluated against the inferential target and account for missingness uncertainty.
+  claim_not_supported: ScholarOps masking designs and downstream-estimand validation tables are local implementation choices.
+- rule_id: EMP-PANEL02
+  source: Hasbrouck, Empirical Market Microstructure
+  source_type: TEXTBOOK
+  edition_year: '2007'
+  chapter_section: §1.4 Econometric Issues
+  page_or_article_locator: p.6
+  doi_or_stable_id: Oxford University Press ISBN 978-0-19-530164-9
+  fulltext_verified: 'YES'
+  transfer_scope: effective information in high-frequency/microstructure samples
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Large row counts can coexist with short calendar span, dependence and misspecification risk.
+  claim_not_supported: Does not provide a universal minimum cluster count or generic panel estimator.
+- rule_id: EMP-SAMPLE04
+  source: Wooldridge, Econometric Analysis of Cross Section and Panel Data, 2nd ed.
+  source_type: TEXTBOOK
+  edition_year: '2010'
+  chapter_section: Ch.20 Cluster Sampling
+  page_or_article_locator: p.863 onward
+  doi_or_stable_id: MIT Press ISBN 978-0-262-23258-6
+  fulltext_verified: 'YES'
+  transfer_scope: independent cluster/event structure for inference
+  transfer_status: TRANSFERABLE_WITH_ADAPTATION
+  claim_supported: Inference must respect the independent sampling/cluster structure rather than raw row count when dependence is material.
+  claim_not_supported: Does not prescribe a universal sample-size cutoff.
+generated_outputs:
+  method_source_locator_registry: references/METHOD_SOURCE_REGISTRY.csv
+  controlled_vocabulary: runtime/CONTROLLED_VOCABULARY_REGISTRY.csv
+  state_machine: runtime/CANONICAL_STATE_MACHINE.csv
+  task_router: runtime/TASK_ROUTER.csv
+  gate_policy: runtime/GATE_ACTIVATION_POLICY.csv
+  module_registry: runtime/MODULE_REGISTRY.csv
+  commands: runtime/COMMANDS.csv
+  runtime_reference: runtime/RUNTIME_REFERENCE.md
+  semantic_invariants: runtime/SEMANTIC_INVARIANTS.csv
+  rule_locator_index: runtime/RULE_LOCATOR_INDEX.csv

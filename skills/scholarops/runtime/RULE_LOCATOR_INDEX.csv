@@ -1,0 +1,212 @@
+rule_id,module_id,section,title
+CORE-Q01,01,01 — Core Research Workflow,Important Problem before Method
+CORE-Q02,01,01 — Core Research Workflow,Construct Identity
+CORE-Q03,01,01 — Core Research Workflow,So-What
+CORE-Q04,01,01 — Core Research Workflow,Important Problem × Credible Attack
+CORE-LIT01,01,01 — Core Research Workflow,Plural Discovery Routes
+CORE-LIT02,01,01 — Core Research Workflow,"Blind-first is a bias diagnostic, not a veto"
+CORE-LIT03,01,01 — Core Research Workflow,Landscape ≠ Focused Census
+CORE-LIT04,01,01 — Core Research Workflow,Focused Census stopping rule
+CORE-LIT05,01,01 — Core Research Workflow,Evidence vs Search Process vs Provenance
+CORE-LIT06,01,01 — Core Research Workflow,Source Quality / Frontier Authority
+CORE-LIT07,01,01 — Core Research Workflow,Read the actual predecessor method
+CORE-LIT08,01,01 — Core Research Workflow,User-provided core material first
+CORE-LIT09,01,01 — Core Research Workflow,Open-world Field Router
+CORE-LIT10,01,01 — Core Research Workflow,Standard / Regulator claim ceiling
+CORE-LIT11,01,01 — Core Research Workflow,Freshness Reopen
+CORE-DISC01,01,01 — Core Research Workflow,Research horizon / boundedness
+CORE-DISC02,01,01 — Core Research Workflow,Discovery freeze / selection
+CORE-DISC03,01,01 — Core Research Workflow,Discovery Iteration vs Confirmatory Lock
+CORE-C01,01,01 — Core Research Workflow,"Collision is diagnostic, not automatic death"
+CORE-C02,01,01 — Core Research Workflow,Single Contribution-Delta Rule
+CORE-C03,01,01 — Core Research Workflow,No Conjunction Novelty
+CORE-C04,01,01 — Core Research Workflow,"Same question, different method"
+CORE-C05,01,01 — Core Research Workflow,Contradiction / deepening
+CORE-C06,01,01 — Core Research Workflow,Inference-Value Test
+CORE-CL01,01,01 — Core Research Workflow,Claim ceiling
+CORE-CL02,01,01 — Core Research Workflow,Mechanism is not heterogeneity by itself
+CORE-CL03,01,01 — Core Research Workflow,Exploratory after result
+CORE-CRAFT01,01,01 — Core Research Workflow,Problematization
+CORE-CRAFT02,01,01 — Core Research Workflow,Argument architecture
+CORE-CRAFT03,01,01 — Core Research Workflow,Theory/contribution map
+CORE-CRAFT04,01,01 — Core Research Workflow,Write-to-think / outline-first
+CORE-D01,01,01 — Core Research Workflow,Data does not create importance
+CORE-D02,01,01 — Core Research Workflow,Historical substitute
+CORE-D03,01,01 — Core Research Workflow,Decomposition is not novelty
+CORE-D04,01,01 — Core Research Workflow,Cheap stop for data/method-triggered candidates
+CORE-M01,01,01 — Core Research Workflow,Professional Method Precedent / Concrete-Problem Grounding
+CORE-M02,01,01 — Core Research Workflow,Method Decision Table
+CORE-M03,01,01 — Core Research Workflow,User correction / new-idea ambiguity
+CORE-M04,01,01 — Core Research Workflow,"Treatment ladder, mapping chain, and inference unit"
+CORE-R01,01,01 — Core Research Workflow,No false precision in candidate ranking
+CORE-OE01,01,01 — Core Research Workflow,Research opportunity and execution readiness are separate
+CORE-L4-01,01,01 — Core Research Workflow,Pre-L4 Freeze + Entry Integrity
+CORE-L4-02,01,01 — Core Research Workflow,Dangerous-neighbor-first
+CORE-L4-03,01,01 — Core Research Workflow,Evidence blocker / queue
+CORE-L4-04,01,01 — Core Research Workflow,L4 status mapping
+CORE-L4-10,01,01 — Core Research Workflow,Evidentiary symmetry for adverse literature judgments
+CORE-L4-05,01,01 — Core Research Workflow,L4 evidence package
+CORE-L4-06,01,01 — Core Research Workflow,One-candidate L4 + last-mile
+CORE-L4-07,01,01 — Core Research Workflow,Incremental unblock
+CORE-L4-08,01,01 — Core Research Workflow,Pre-Formal L4 Recheck: Freshness Sentinel First
+CORE-L4-09,01,01 — Core Research Workflow,Literature-selection hurdle for heavily searched research universes
+CORE-GOV01,01,01 — Core Research Workflow,Skill anti-bloat
+EMP-GATE00,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Empirical Execution Class / Risk Trigger Router
+EMP-ENTRY01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Empirical entry anchor before results
+EMP-EXEC01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Assistant-first execution
+EMP-EXEC02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Research code minimalism
+EMP-ASSET01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Existing asset first
+EMP-ASSET02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Acquisition scope follows estimand
+EMP-DATA00,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Concrete-data escalation
+EMP-DATA01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Raw Structural QA
+EMP-DATA02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Construct-first variable definition
+EMP-DATA03,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Derived Variable Construction
+EMP-DATA04,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Two-end QA sandwich
+EMP-DATA05,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Blind Distribution / Tail Audit
+EMP-DATA06,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Outlier taxonomy / distributional tail
+EMP-DATA07,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Cleaning / Transformation / Scale Decision
+EMP-DATA08,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Post-clean QA: change-triggered
+EMP-DATA08A,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Missing Data Cheap Triage
+EMP-DATA09,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Missing-data reality / selection / imputation gate
+EMP-DATA09A,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Imputation decision
+EMP-DATA09B,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Imputation validation
+EMP-DATA09F,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Finance firm-characteristic special case
+EMP-BLIND01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Four-level data-access firewall
+EMP-BLIND01A,02,"02 — Empirical Data, Pilot, Screen & Formal Methods","Blinding is a principle, not an event-study template"
+EMP-BLIND01B,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Background familiarity ≠ effect-open
+EMP-BLIND02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Forbidden leakage before B3
+EMP-BLIND02A,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Analyst-coding blindness
+EMP-BLIND03,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Already-seen data
+EMP-PANEL01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Aggregation is part of measurement
+EMP-PANEL02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Effective information is not raw row count
+EMP-SAMPLE01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Four execution sample concepts
+EMP-SAMPLE02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",No rule-of-thumb N
+EMP-SAMPLE03,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Event-study / finance-specific calibration
+EMP-SAMPLE04,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Cluster/event count
+EMP-SAMPLE05,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Required artifact
+EMP-FAIL01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Failure classification
+EMP-FAIL02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Mandatory diagnosis / evidence proportional to failure layer
+EMP-REPAIR01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Repair legality
+EMP-ID01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Pre-Pilot Identification Minimum
+EMP-ID02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Formal Identification Strengthening
+EMP-INFL01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Regression Influence Audit
+EMP-PILOT01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Pilot state / verdict
+EMP-PROBE01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Candidate observation ≠ candidate outcome
+EMP-FREEZE-A,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Outcome-Screen Decision Freeze
+EMP-FREEZE-A2,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",S13 entry and completion
+EMP-FREEZE-B,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Formal Main Specification Freeze
+EMP-SCREEN01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Outcome screen is optional
+EMP-SCREEN02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Screen verdict semantics
+EMP-REUSE01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Freeze `SCREEN_DATA_REUSE_POLICY` before opening the effect
+EMP-REUSE02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Inference after data reuse
+EMP-FORMAL01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods","Formal Main Estimation executes Freeze B, not a new design"
+EMP-FORMAL02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Formal Result QA
+EMP-FORMAL03,02,"02 — Empirical Data, Pilot, Screen & Formal Methods","Mechanism / robustness is triggered, not automatic"
+EMP-MULT00,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Three multiplicity layers are distinct
+EMP-MULT01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Define the scientific claim unit before the testing family
+EMP-MULT02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Claim logic
+EMP-MULT03,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Error criterion / method selection
+EMP-MULT04,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Primary / secondary / exploratory hierarchy
+EMP-MULT05,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Reporting
+EMP-MULT06,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Gate status / automatic short-circuit
+EMP-SPECSEARCH01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Specification search on one dataset
+EMP-THRESH00,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Execution-class activation
+EMP-THRESH01,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Keep three thresholds separate
+EMP-THRESH02,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Evidence order for an economic minimum
+EMP-THRESH03,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",A formal economic-null conclusion cannot come from nonsignificance
+EMP-THRESH04,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",No arbitrary convention
+EMP-THRESH05,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Threshold Source Registry
+EMP-THRESH06,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Threshold commensurability
+EMP-THRESH07,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Formal economic-threshold conflict resolution
+EMP-THRESH08,02,"02 — Empirical Data, Pilot, Screen & Formal Methods",Required artifact
+AGENDA-01,03,Optional Profile — AI × Finance,"Profile scope, not a personal research agenda"
+AGENDA-02,03,Optional Profile — AI × Finance,Signal → adoption → decision → market ladder
+AGENDA-03,03,Optional Profile — AI × Finance,Entry requirement for market-impact claims
+AGENDA-04,03,Optional Profile — AI × Finance,AI-system identity is dynamic
+AGENDA-05,03,Optional Profile — AI × Finance,Snapshot live AI systems
+AGENDA-06,03,Optional Profile — AI × Finance,Historical leakage and memorization risk
+AGENDA-07,03,Optional Profile — AI × Finance,Evaluation independence
+AGENDA-08,03,Optional Profile — AI × Finance,AI capability is not synonymous with NLP
+AGENDA-09,03,Optional Profile — AI × Finance,A benchmark result is not automatically a finance paper
+AGENDA-10,03,Optional Profile — AI × Finance,Blind-first agenda discovery when applicable
+AGENDA-11,03,Optional Profile — AI × Finance,Agenda-stage outputs and transition
+AGENDA-12,03,Optional Profile — AI × Finance,Candidate-family rule
+AGENDA-13,03,Optional Profile — AI × Finance,Finance-specific increment
+AGENDA-14,03,Optional Profile — AI × Finance,Project-specific AI claims live in project artifacts
+AGENDA-15,03,Optional Profile — AI × Finance,Finance-program and field-home gates
+AI-FIN-FIELD01,03,Optional Profile — AI × Finance,Finance legibility
+AI-FIN-FIELD02,03,Optional Profile — AI × Finance,Academic home
+AI-FIN-FIELD03,03,Optional Profile — AI × Finance,Domain familiarity
+AGENDA-16,03,Optional Profile — AI × Finance,General versus agenda-challenge coverage
+AGENDA-17,03,Optional Profile — AI × Finance,Mechanism analogue
+AGENDA-18,03,Optional Profile — AI × Finance,"Individual, collective, and rationality claims"
+AGENDA-19,03,Optional Profile — AI × Finance,Authentic finance outcomes
+AGENDA-20,03,Optional Profile — AI × Finance,Blind-map-driven frontier search
+AGENDA-21,03,Optional Profile — AI × Finance,Agenda challenge trigger
+AGENDA-22,03,Optional Profile — AI × Finance,External discovery handoff
+AGENDA-23,03,Optional Profile — AI × Finance,Neutral lifecycle coverage
+AGENDA-24,03,Optional Profile — AI × Finance,Direction-neutral candidate judgment
+AGENDA-25,03,Optional Profile — AI × Finance,Architecture decomposition
+ACCESS-01,04,04 — Access and Resource Interface,Access states are not interchangeable
+ACCESS-02,04,04 — Access and Resource Interface,Resolve existing assets before reacquiring data
+ACCESS-03,04,04 — Access and Resource Interface,WRDS and institutionally licensed databases
+ACCESS-04,04,04 — Access and Resource Interface,Usage-based market-data services
+ACCESS-05,04,04 — Access and Resource Interface,LSEG and similar research terminals/APIs
+ACCESS-06,04,04 — Access and Resource Interface,Bloomberg and other shared-terminal resources
+ACCESS-07,04,04 — Access and Resource Interface,Verified entitlement outranks generic platform marketing
+ACCESS-08,04,04 — Access and Resource Interface,Do not repeatedly spend search time on known-unavailable paths
+ACCESS-09,04,04 — Access and Resource Interface,Maintain an access registry when access is research-relevant
+ACCESS-10,04,04 — Access and Resource Interface,Assistant-first execution
+ACCESS-11,04,04 — Access and Resource Interface,Discover lawful alternatives before declaring access failure
+ACCESS-12,04,04 — Access and Resource Interface,A fallback must preserve the construct or reduce the claim
+ACCESS-13,04,04 — Access and Resource Interface,Record the strength of access evidence
+ACCESS-14,04,04 — Access and Resource Interface,Scalability is part of access feasibility
+ACCESS-15,04,04 — Access and Resource Interface,Do not bias research selection toward familiar data pipelines
+ACCESS-16,04,04 — Access and Resource Interface,Separate cost state from usability state
+PROJ-01,05,05 — Project State and Isolation,Project state schema
+PROJ-02,05,05 — Project State and Isolation,Project-specific values live outside ScholarOps Core
+PROJ-03,05,05 — Project State and Isolation,Project isolation
+PROJ-04,05,05 — Project State and Isolation,"Inactive, blocked, held, and closed projects remain isolated"
+PROJ-05,05,05 — Project State and Isolation,Generalized multi-project roles
+PROJ-06,05,05 — Project State and Isolation,Cross-project asset reuse
+SPEC-TASK01,06,06 — Specialized Design and Evaluation Gates,Task Ecology Validity
+SPEC-EVAL01,06,06 — Specialized Design and Evaluation Gates,Evaluation Anchor Classes
+SPEC-SCORE01,06,06 — Specialized Design and Evaluation Gates,Scorability / Selection
+SPEC-ERR01,06,06 — Specialized Design and Evaluation Gates,Error-taxonomy provenance
+SPEC-HUMAN01,06,06 — Specialized Design and Evaluation Gates,Human-subjects Reality
+SPEC-HUMAN02,06,06 — Specialized Design and Evaluation Gates,Expert-label scarcity
+SPEC-TRT01,06,06 — Specialized Design and Evaluation Gates,Treatment Identity
+SPEC-COST01,06,06 — Specialized Design and Evaluation Gates,Resource Vector / Cost-Quality
+SPEC-COST02,06,06 — Specialized Design and Evaluation Gates,Economic decision mapping
+SPEC-SCOPE01,06,06 — Specialized Design and Evaluation Gates,Base Scope First / No Extension Rescue
+SPEC-ROB01,06,06 — Specialized Design and Evaluation Gates,Main specification integrity
+GOV-ART00,07,"07 — Artifact, State and Reproducibility Governance",Selective Hash / Fixity Policy
+GOV-ART01,07,"07 — Artifact, State and Reproducibility Governance",Artifact identity
+GOV-ART02,07,"07 — Artifact, State and Reproducibility Governance",Verification reuse / re-check triggers
+GOV-PATH01,07,"07 — Artifact, State and Reproducibility Governance",Location identity
+GOV-STATE02,07,"07 — Artifact, State and Reproducibility Governance",Stage non-regression
+GOV-REG01,07,"07 — Artifact, State and Reproducibility Governance",Registry Identity / Drift
+GOV-REG02,07,"07 — Artifact, State and Reproducibility Governance",Registry minimum schemas
+GOV-UP01,07,"07 — Artifact, State and Reproducibility Governance",Upstream transition audit
+GOV-UP02,07,"07 — Artifact, State and Reproducibility Governance",Schema migration
+GOV-DRIFT01,07,"07 — Artifact, State and Reproducibility Governance",Claim-changing return
+GOV-SEEN01,07,"07 — Artifact, State and Reproducibility Governance",Seen Data Register
+GOV-REP01,07,"07 — Artifact, State and Reproducibility Governance",Reproducibility
+GOV-REP02,07,"07 — Artifact, State and Reproducibility Governance",Replicability
+GOV-CLOSURE01,07,"07 — Artifact, State and Reproducibility Governance",Task Closure Self-Validation
+GOV-DELIV01,07,"07 — Artifact, State and Reproducibility Governance",Milestone-Triggered Deliverable
+GOV-DELIV02,07,"07 — Artifact, State and Reproducibility Governance",Completion summary
+GOV-FAILASSET01,07,"07 — Artifact, State and Reproducibility Governance",Failure Asset Extraction
+GOV-COOLDOWN01,07,"07 — Artifact, State and Reproducibility Governance",Reopen
+GOV-QA01,07,"07 — Artifact, State and Reproducibility Governance",Research-relevant QA
+GOV-VERSION01,07,"07 — Artifact, State and Reproducibility Governance",Skill release identity / fixity
+GOV-VERSION02,07,"07 — Artifact, State and Reproducibility Governance",Stable release requires validator PASS
+GOV-EVID01,08,"08 — Host Memory, Recovery, Evidence and Language",Evidence hierarchy
+GOV-STATE01,08,"08 — Host Memory, Recovery, Evidence and Language",Derive the next state mechanically
+GOV-RES01,08,"08 — Host Memory, Recovery, Evidence and Language",Resolve prior assets before requesting them again
+GOV-CONV01,08,"08 — Host Memory, Recovery, Evidence and Language",Evidence reconstruction and handoff
+GOV-TRANSCRIPT01,08,"08 — Host Memory, Recovery, Evidence and Language",Transcript completeness audit
+GOV-SEEN02,08,"08 — Host Memory, Recovery, Evidence and Language",Upstream factual correction is legal; outcome-driven redesign is not
+GOV-ACT01,08,"08 — Host Memory, Recovery, Evidence and Language",Irreversible actions remain irreversible
+GOV-AUDIT01,08,"08 — Host Memory, Recovery, Evidence and Language",Current-workflow audit (`AU`)
+GOV-LANG01,08,"08 — Host Memory, Recovery, Evidence and Language",User-facing language

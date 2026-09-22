@@ -1,0 +1,24 @@
+gate_id,gate,activation_class,trigger,execution
+GATE-CONSTRUCT-IDENTITY,Construct/claim identity,ALWAYS_ON,all research tasks,"name the construct and the measured object once per new design or claim, per CORE-Q02 and EMP-DATA02; silent thereafter unless they diverge"
+GATE-STATE-NOSKIP,Current state/no-skip,ALWAYS_ON,all research tasks,one-line entry anchor per EMP-ENTRY01 before any estimation output; silent thereafter unless a state is skipped or unevidenced
+GATE-SEEN-BLINDNESS,Seen Data/blindness,ALWAYS_ON,empirical/confirmatory tasks,"state SEEN_DATA_STATUS before any effect is opened and write the exposure into the register, per GOV-SEEN01 and EMP-BLIND03; silent thereafter"
+GATE-CLAIM-DRIFT,Claim drift,ALWAYS_ON,all staged projects,"on any return to an earlier stage or change of claim, record reason, evidence and supersedes, per GOV-DRIFT01 and GOV-STATE02; silent when the claim is unchanged"
+GATE-SOURCE-QUALITY,Source quality,ALWAYS_ON,literature/evidence claims,"name the source tier and authority for each evidence claim, per CORE-LIT06; silent when the claim rests on an already-registered source"
+GATE-ASSISTANT-FIRST,Assistant-first execution,ALWAYS_ON,data/code tasks,"when host capabilities and permissions permit, run the data/code step directly and report what was executed; escalate only the genuinely blocked acquisition/permission step"
+GATE-VERSION-RESOLUTION,Version resolution,ALWAYS_ON,multiple ScholarOps copies or ambiguous release identity,resolve CANONICAL_VERSION_STATUS from explicit release identity and verified fixity when applicable; automatic and silent when a single trusted copy is loaded
+GATE-MISSING-DATA,Missing full audit,TRIGGERED,cheap triage finds material missing/selection,full only if triggered
+GATE-WITHIN-STUDY-MULTIPLICITY,Within-study multiplicity,TRIGGERED,more than one confirmatory test supports same claim,auto N/A otherwise
+GATE-ECONOMIC-THRESHOLD,Economic threshold,TRIGGERED,"FORMAL_STUDY only, when an economic-effect decision requires SESOI/MDE","NOT_APPLICABLE for technical probe, measurement validation and outcome decision screen; full gate only when triggered"
+GATE-SPECIFICATION-SEARCH,Specification search / data snooping,TRIGGERED,"the same dataset is used repeatedly to choose window, model, rule or sample","lock the specification before formal estimation, or use a reality-check style procedure or holdout; otherwise SPECIFICATION_SEARCH_STATUS=BLOCKED; untriggered→NOT_APPLICABLE"
+GATE-LITERATURE-SELECTION-HURDLE,Literature selection / factor-zoo hurdle,TRIGGERED,the research question itself was selected from a heavily searched research universe,"raise the evidence hurdle, require independent validation or lower the claim ceiling; owned by 01_CORE at L4, not by the empirical multiplicity gate; untriggered→NOT_APPLICABLE"
+GATE-SCREEN-REUSE-POLICY,Screen data reuse policy,TRIGGERED,OUTCOME_SCREEN_APPLICABILITY=APPLICABLE,freeze SCREEN_DATA_REUSE_POLICY before any effect is opened; default EXTERNAL_HOLDOUT; untriggered→NOT_APPLICABLE
+GATE-TERMINATION-ARCHIVE,Terminated branch archive,TRIGGERED,any formal STOP or STOP_RESOURCE_ALLOCATION verdict,complete S24 termination record before the branch is closed; untriggered→NOT_APPLICABLE
+GATE-INFLUENCE-AUDIT,Influence audit,TRIGGERED,outcome regression with plausible influential-point risk,pre-spec then B3
+GATE-FEW-CLUSTER,Few cluster/event methods,TRIGGERED,small independent shock/cluster count,CORE-M01
+GATE-SPECIALIZED-DESIGN,Specialized human/agent/cost gates,TRIGGERED,design actually uses them,load module 06 only
+GATE-RELEASE-PACKAGING,Full release packaging,MILESTONE_ONLY,formal project freeze/handoff/archive or distributable project artifact,assemble the project-specific required artifact package; do not assume repository-maintenance tooling exists in the installed Skill
+GATE-POST-CLEAN-QA,Full post-clean QA,STALE_OR_CHANGED_ONLY,data/sample/transform/aggregation changed,identity check only if no change
+GATE-PRE-FORMAL-L4-RECHECK,Pre-formal L4 freshness/collision recheck,STALE_OR_CHANGED_ONLY,"stale review, fast-moving field, method/measurement change, or sentinel hit before formal study",freshness sentinel by default; full update only when triggered
+GATE-SYSTEM-IDENTITY,System identity,TRIGGERED,"live/dynamic AI system, model/version/tool identity, or other system identity is material to construct",PASS/NOT_APPLICABLE before outcome-bearing execution
+GATE-CLOSURE-LIGHT,Task closure light check,ALWAYS_ON,before claiming task complete/PASS/next-step legality or delivering a result,"run internal LIGHT closure before claiming complete, PASS or next-step legality, per GOV-CLOSURE01; no extra artifact by default"
+GATE-CLOSURE-MILESTONE,Task closure deep validation,MILESTONE_ONLY,freeze/formal handoff/pilot result/formal result/formal dataset/code release/canonical handoff/Skill release,MILESTONE closure with task-specific executable validation
