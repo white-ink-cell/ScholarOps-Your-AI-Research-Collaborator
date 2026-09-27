@@ -33,9 +33,8 @@ ScholarOps 来自对真实金融实证研究流程的反复使用，并在首个
 ### 方式 2 — 在 Codex 中安装完整 ScholarOps
 
 ```bash
-git clone https://github.com/white-ink-cell/scholarops-research.git
-mkdir -p ~/.agents/skills
-cp -R scholarops-research/skills/scholarops ~/.agents/skills/
+git clone https://github.com/white-ink-cell/ScholarOps-Your-AI-Research-Collaborator.git
+cp -R ScholarOps-Your-AI-Research-Collaborator/skills/scholarops ~/.agents/skills/
 ```
 
 Codex 会从 `$HOME/.agents/skills` 读取用户级技能。可安装目录是：
