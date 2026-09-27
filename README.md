@@ -34,6 +34,7 @@ Use the copy-paste prompt:
 
 ```bash
 git clone https://github.com/white-ink-cell/ScholarOps-Your-AI-Research-Collaborator.git
+mkdir -p ~/.agents/skills
 cp -R ScholarOps-Your-AI-Research-Collaborator/skills/scholarops ~/.agents/skills/
 ```
 
