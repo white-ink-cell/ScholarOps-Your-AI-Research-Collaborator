@@ -33,9 +33,8 @@ Use the copy-paste prompt:
 ### Option 2 — install the full Skill in Codex
 
 ```bash
-git clone https://github.com/white-ink-cell/scholarops-research.git
-mkdir -p ~/.agents/skills
-cp -R scholarops-research/skills/scholarops ~/.agents/skills/
+git clone https://github.com/white-ink-cell/ScholarOps-Your-AI-Research-Collaborator.git
+cp -R ScholarOps-Your-AI-Research-Collaborator/skills/scholarops ~/.agents/skills/
 ```
 
 Codex discovers user skills from `$HOME/.agents/skills`. The installable directory is:
