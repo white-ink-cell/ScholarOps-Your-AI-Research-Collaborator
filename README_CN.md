@@ -34,6 +34,7 @@ ScholarOps 来自对真实金融实证研究流程的反复使用，并在首个
 
 ```bash
 git clone https://github.com/white-ink-cell/ScholarOps-Your-AI-Research-Collaborator.git
+mkdir -p ~/.agents/skills
 cp -R ScholarOps-Your-AI-Research-Collaborator/skills/scholarops ~/.agents/skills/
 ```
 
